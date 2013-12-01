@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+%html
+	%head
+	%body
+		%main
+			= form_for :person, url: people_path do |f|
+				%p
+				= f.label :name
+				%br
+				= f.text_field :name
+				%p
+				= f.label :gender
+				%br
+				= f.text_field  :gender 
+				%p
+				= f.label :start
+				%br
+				= f.text_field :start 
+				%p.button
+				= f.submit
