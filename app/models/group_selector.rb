@@ -1,10 +1,6 @@
 class GroupSelector
 	def self.select people
-		combinations = people.combination(2).to_a
-		scores = scorers.map do |scorer|
-			scores = scorer.score combinations
-			scores.sort_by {|s| s[:score]}
-		end.flatten
+		scores = get_scores people
 		first_group = scores.last
 		scores.delete first_group
 		first_group = first_group[:group]
@@ -24,4 +20,12 @@ class GroupSelector
 
 	private
 		def self.scorers; [ByGenderScorer, ByStartDateScorer]; end
+
+		def self.get_scores people
+			combinations = people.combination(2).to_a
+			scorers.map do |scorer|
+				scores = scorer.score combinations
+				scores.sort_by {|s| s[:score]}
+			end.flatten
+		end
 end
