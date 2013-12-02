@@ -2,15 +2,10 @@ class GroupSelector
 	def self.select people
 		scores = get_scores people
 		to_place = people
+		groups = []
 		first_group = scores.last[:group]
-		to_place.delete_if {|p| first_group.include? p }
-		groups = [first_group]
-		while !to_place.empty? do 
-			group = next_group scores, to_place
-			groups << group
-			to_place.delete_if {|p| group.include? p }
-		end
-		groups
+		add_to_groups_and_remove_from_to_place first_group, groups, to_place
+		place_remaining groups, to_place
 	end
 
 	private
@@ -24,11 +19,24 @@ class GroupSelector
 			end.flatten
 		end
 
+		def self.add_to_groups_and_remove_from_to_place group, groups, to_place
+			groups << group
+			to_place.delete_if {|p| group.include? p }
+		end
+
 		def self.next_group scores, to_place
 			scores.find do |group| 
 				first_included = to_place.include? group[:group][0] 
 				second_included = to_place.include? group[:group][1] 
 				first_included && second_included
 			end[:group]
+		end
+
+		def self.place groups, to_place
+			while !to_place.empty? do
+				group = next_group scores, to_place
+				add_to_groups_and_remove_from_to_place group, groups, to_place
+			end
+			groups
 		end
 end
