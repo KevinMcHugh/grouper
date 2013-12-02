@@ -5,7 +5,7 @@ class GroupSelector
 		groups = []
 		first_group = scores.last[:group]
 		add_to_groups_and_remove_from_to_place first_group, groups, to_place
-		place_remaining groups, to_place
+		place groups, scores, to_place
 	end
 
 	private
@@ -32,7 +32,7 @@ class GroupSelector
 			end[:group]
 		end
 
-		def self.place groups, to_place
+		def self.place groups, scores, to_place
 			while !to_place.empty? do
 				group = next_group scores, to_place
 				add_to_groups_and_remove_from_to_place group, groups, to_place
