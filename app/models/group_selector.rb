@@ -1,10 +1,9 @@
 class GroupSelector
 	def self.select people
 		scores = get_scores people
-		first_group = scores.last
-		scores.delete first_group
-		first_group = first_group[:group]
-		to_place = people - first_group
+		to_place = people
+		first_group = scores.last[:group]
+		to_place.delete_if {|p| first_group.include? p }
 		groups = [first_group]
 		while !to_place.empty? do 
 			group = next_group scores, to_place
