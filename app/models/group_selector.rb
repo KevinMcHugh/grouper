@@ -25,11 +25,7 @@ class GroupSelector
 		end
 
 		def self.next_group scores, to_place
-			scores.find do |group| 
-				first_included = to_place.include? group[:group][0] 
-				second_included = to_place.include? group[:group][1] 
-				first_included && second_included
-			end[:group]
+			scores.find {|group|(group[:group] - to_place).empty? }[:group]
 		end
 
 		def self.place groups, scores, to_place
