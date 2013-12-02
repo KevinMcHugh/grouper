@@ -7,11 +7,7 @@ class GroupSelector
 		to_place = people - first_group
 		groups = [first_group]
 		while !to_place.empty? do 
-			group = scores.find do |group| 
-				first_included = to_place.include? group[:group][0] 
-				second_included = to_place.include? group[:group][1] 
-				first_included && second_included
-			end[:group]
+			group = next_group scores, to_place
 			groups << group
 			to_place.delete_if {|p| group.include? p }
 		end
@@ -27,5 +23,13 @@ class GroupSelector
 				scores = scorer.score combinations
 				scores.sort_by {|s| s[:score]}
 			end.flatten
+		end
+
+		def self.next_group scores, to_place
+			scores.find do |group| 
+				first_included = to_place.include? group[:group][0] 
+				second_included = to_place.include? group[:group][1] 
+				first_included && second_included
+			end[:group]
 		end
 end
