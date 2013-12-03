@@ -22,5 +22,12 @@ describe GroupSelector do
 				expect(subject).to match_array result
 			end
 		end
+		# context 'with real data' do
+		# 	let (:result) {}
+		# 	subject{GroupSelector.select Person.all}
+		# 	it 'selects the most diverse groups' do
+		# 		expect(subject).to match_array result
+		# 	end
+		# end
 	end
 end
