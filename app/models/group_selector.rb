@@ -1,3 +1,4 @@
+require 'pp'
 class GroupSelector
 	def self.select people
 		scores = get_scores people
@@ -20,12 +21,14 @@ class GroupSelector
 		end
 
 		def self.add_to_groups_and_remove_from_to_place group, groups, to_place
-			groups << group
+			groups << group.clone
 			to_place.delete_if {|p| group.include? p }
 		end
 
 		def self.next_group scores, to_place
-			scores.find {|group|(group[:group] - to_place).empty? }[:group]
+			group = scores.find { |group| (group[:group] - to_place).empty? }
+			return group[:group] unless group.nil? || group.empty?
+			to_place
 		end
 
 		def self.place groups, scores, to_place
