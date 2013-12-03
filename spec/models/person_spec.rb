@@ -5,6 +5,14 @@ describe Person do
 	let (:bob) 	 {Person.new({name: "bob",   gender: :man,   start: Date.iso8601("2013-01-01")})}
 	let (:dan) 	 {Person.new({name: "dan",   gender: :trans, start: Date.iso8601("2013-01-01")})}
 
+	describe '#new' do
+		subject {Person.new({gender: "man"})}
+		it 'should symbolize the argument' do
+			expect(subject.man?).to be_true
+			expect(subject.woman?).to be_false
+		end
+	end
+
 	describe '#man?' do
 		context 'when person is a woman' do
 			subject {alice}
