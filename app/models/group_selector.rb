@@ -12,7 +12,7 @@ class GroupSelector
 		def self.scorers; [ByGenderScorer, ByStartDateScorer]; end
 
 		def self.get_scores people
-			combinations = people.combination(2).to_a
+			combinations = people.combination(group_size).to_a
 			scorers.map do |scorer|
 				scores = scorer.score combinations
 				scores.sort_by {|s| s[:score]}
@@ -37,4 +37,5 @@ class GroupSelector
 			end
 			groups.map {|group| Group.new(people: group)}
 		end
+		def self.group_size; 4; end
 end
