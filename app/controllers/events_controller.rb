@@ -17,7 +17,6 @@ class EventsController < ApplicationController
 
 	def show
 		@event = Event.find(params[:id])
-		puts @event
 	end
 
 	private 
