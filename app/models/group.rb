@@ -5,4 +5,6 @@ class Group < ActiveRecord::Base
 	def == other
 		other.event == event && other.people == people
 	end
+
+	def inspect; people.map {|p| p.name}; end
 end
