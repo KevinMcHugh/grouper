@@ -4,12 +4,7 @@ class EventsController < ApplicationController
 	end
 
 	def create
-		group_arrays = GroupSelector.select(Person.all)
-		groups = group_arrays.map do |group_array| 
-			group = Group.new people: group_array
-			group.save
-			group
-		end
+		groups = GroupSelector.select(Person.all)
 		params.merge!({groups: groups})
 		@event = Event.new(event_params)
 		@event.save
