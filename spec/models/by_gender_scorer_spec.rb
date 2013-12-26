@@ -3,10 +3,11 @@ require 'spec_helper'
 describe ByGenderScorer do
 	describe '.score' do
 		context 'with valid arguments' do
-			let (:alice) {Person.new({name: "alice", gender: :woman, start: Date.iso8601("2010-01-01")})}
-			let (:bob) 	 {Person.new({name: "bob",   gender: :man,   start: Date.iso8601("2013-01-01")})}
-			let (:carol) {Person.new({name: "carol", gender: :woman, start: Date.iso8601("2010-01-01")})}
-			let (:dan) 	 {Person.new({name: "dan",   gender: :trans, start: Date.iso8601("2013-01-01")})}
+			let (:alice) {build(:person)}
+			let (:bob) 	 {build(:person, gender: :man)}
+			let (:carol) {build(:person)}
+			let (:dan)   {build(:person, gender: :trans)}
+
 
 			subject {ByGenderScorer.score([[alice, bob],[alice, carol], [alice, dan],
 											  [bob, carol], [bob, dan], [carol, dan]])}
