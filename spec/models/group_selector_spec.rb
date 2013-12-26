@@ -6,9 +6,11 @@ describe GroupSelector do
 		let (:bob) 	 {Person.new({name: "bob",   gender: :man,   start: Date.iso8601("2013-01-01")})}
 		let (:carol) {Person.new({name: "carol", gender: :woman, start: Date.iso8601("2010-01-01")})}
 		let (:dan) 	 {Person.new({name: "dan",   gender: :trans, start: Date.iso8601("2013-01-01")})}
-		
+		let(:group1) {Group.new people: [alice, bob]}
+
 		context 'with an even number of people' do
-			let (:result) {[[alice, bob],[carol, dan]]}
+			let(:group2) {Group.new people: [carol, dan]}
+			let (:result) {[group1, group2]}
 			subject{GroupSelector.select [alice, bob, carol, dan]}
 			it 'selects the most diverse groups' do
 				expect(subject).to match_array result
@@ -16,10 +18,11 @@ describe GroupSelector do
 		end
 
 		context 'with an odd number of people' do
-			let (:result) {[[alice, bob],[carol]]}
+			let(:group2) {Group.new people: [carol]}
+			let (:result) {[group1, group2]}
 			subject{GroupSelector.select [alice, bob, carol]}
 			it 'selects the most diverse groups' do
-				expect(subject).to match_array result
+				expect(subject).to eq result
 			end
 		end
 	end
