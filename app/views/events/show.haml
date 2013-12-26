@@ -1,0 +1,7 @@
+%h1 EVENT
+%p
+	#{@event.name}
+-@event.groups.each do |group|
+	%p group
+	-group.people.each do |person|
+		%li #{person.name}

@@ -1,4 +1,3 @@
-require 'pp'
 class GroupSelector
 	def self.select people
 		scores = get_scores people
