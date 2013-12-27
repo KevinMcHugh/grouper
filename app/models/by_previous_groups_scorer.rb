@@ -2,7 +2,7 @@ class ByPreviousGroupsScorer < ScoreTransformer
   def self.score groups
     group_score_mappings = {}
     groups.each do |people|
-      score =  score_people(people)  / people.length
+      score = score_people(people) / people.length
       group_score_mappings[people] = score
     end
     transform score_distances(group_score_mappings)
@@ -19,7 +19,7 @@ class ByPreviousGroupsScorer < ScoreTransformer
     end
 
     def self.score_person person, other_people
-      previously_in_groups = person.groups.map {|group| group.people}.flatten.uniq
+      previously_in_groups = person.groups.flat_map {|group| group.people}.uniq
       score = other_people.map do |other_person|
         included = previously_in_groups.include? other_person
         included ? 0.0 : 1.0
