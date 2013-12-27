@@ -1,10 +1,10 @@
 class ByGenderScorer < ScoreTransformer
   def self.score groups
-    group_score_mapping = {}
+    group_distance_mapping = {}
     groups.each do |group|
       genders = group.map {|p| p.gender}.uniq
-      group_score_mapping[group] = genders.length / group.length
+      group_distance_mapping[group] = genders.length.to_f / group.length
     end
-    transform group_score_mapping
+    transform score_distances(group_distance_mapping)
   end
 end
