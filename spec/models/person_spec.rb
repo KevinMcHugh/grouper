@@ -54,4 +54,18 @@ describe Person do
 			end
 		end
 	end
+
+	describe '#==' do
+		subject {build(:person)}
+		let(:alice) {build(:person)}
+		let(:bob) {build(:bob)}
+
+		context 'when objects are equal' do
+			it {should == alice}
+		end
+
+		context 'when objects are not equal' do
+			it {should_not == bob}
+		end
+	end	
 end
