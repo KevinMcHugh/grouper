@@ -6,6 +6,6 @@ class CreateGroups < ActiveRecord::Migration
     end
     change_table :people do |t|
       t.belongs_to :groups
-  	end
+    end
   end
 end

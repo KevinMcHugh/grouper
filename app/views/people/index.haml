@@ -1,6 +1,6 @@
 - @people.each do |person|
-	%p
-		#{person.name}
-		#{person.gender}
-		#{person.start}
-		= link_to 'Delete', person_path(person), method: :delete
+  %p
+    #{person.name}
+    #{person.gender}
+    #{person.start}
+    = link_to 'Delete', person_path(person), method: :delete
