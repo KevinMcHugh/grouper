@@ -20,7 +20,7 @@ FactoryGirl.define do
     start "2010-01-01"
   end
   factory :group do
-    people {[FactoryGirl.create(:person), FactoryGirl.create(:bob)]}
+    people {[create(:person), create(:bob)]}
   end
   factory :event do
     name 'test_event'
