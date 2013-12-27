@@ -32,12 +32,20 @@ describe ByPreviousGroupsScorer do
         let (:f)   {build(:bob, {name: "f"})}
         let (:g)   {build(:carol, name: "g")}
         let (:h)   {build(:dan, {name: "h"})}
-        subject {ByPreviousGroupsScorer.score [alice,bob,carol,dan,e,f,g,h].combination(4)}
+        let (:group1) {build(:group)}
+        let (:group2) {build(:group, people: [e,f,g,h])}
+        let (:result) do
+          [{group: [alice, bob, carol, dan], score: 0},
+          {group: [e, f, g, h], score: 0},
+          {group: [alice, f, carol, h], score: 1}]
+        end
+        before(:each) do
+          [alice,bob,carol,dan].map {|p| p.groups = [group1]}
+          [e,f,g,h].map {|p| p.groups = [group2]}
+        end
+        subject {ByPreviousGroupsScorer.score [[alice,bob,carol,dan], [e,f,g,h], [alice,f,carol,h]]}
         it 'gives score <0 and > 1' do
-          subject.each do |score_mapping|
-            score_mapping[:score].should be >= 0
-            score_mapping[:score].should be <= 1
-          end
+          expect(subject).to match_array result
         end
       end
     end
