@@ -3,17 +3,17 @@ require 'spec_helper'
 describe GroupSelector do
 	describe '.select' do
 		let (:alice) {build(:person)}
-		let (:bob) 	 {build(:person, {name: "bob", gender: :man, start: "2013-01-01"})}
-		let (:carol) {build(:person, name: "carol")}
-		let (:dan) 	 {build(:person, {name: "dan", gender: :trans, start: "2013-01-01"})}
+		let (:bob) 	 {build(:bob)}
+		let (:carol) {build(:carol)}
+		let (:dan) 	 {build(:dan)}
 		let (:e) 	 {build(:person, name: "e")}
-		let (:f) 	 {build(:person, {name: "f", gender: :man, start: "2013-01-01"})}
-		let (:g) 	 {build(:person, name: "g")}
-		let (:h) 	 {build(:person, {name: "h", gender: :trans, start: "2013-01-01"})}
+		let (:f) 	 {build(:bob, {name: "f"})}
+		let (:g) 	 {build(:carol, name: "g")}
+		let (:h) 	 {build(:dan, {name: "h"})}
 
+		let(:group1) {Group.new people: [alice, bob, carol, dan]}
 
 		context 'with an even number of people' do
-			let(:group1) {Group.new people: [alice, bob, carol, dan]}
 			let(:group2) {Group.new people: [e,f,g,h]}
 			let (:result) {[group1, group2]}
 			subject{GroupSelector.select [alice, bob, carol, dan, e,f,g,h]}
@@ -23,8 +23,7 @@ describe GroupSelector do
 		end
 
 		context 'with an odd number of people' do
-			let(:group1) {Group.new people: [dan, e,f,g]}
-			let(:group2) {Group.new people: [alice, bob, carol]}
+			let(:group2) {Group.new people: [e,f,g]}
 			let (:result) {[group1,group2]}
 			subject{GroupSelector.select [alice, bob, carol, dan, e,f,g]}
 			it 'selects the most diverse groups' do

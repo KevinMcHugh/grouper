@@ -4,8 +4,8 @@ describe ByStartDateScorer do
 	describe '.score' do
 		context 'with valid arguments' do
 			let (:alice) {build(:person)}
-			let (:bob) 	 {build(:person, start: "2013-01-01")}
-			let (:carol) {build(:person)}
+			let (:bob) 	 {build(:bob)}
+			let (:carol) {build(:carol)}
 
 			subject {ByStartDateScorer.score([[alice, bob],[alice, carol], [bob, carol]])}
 			it 'scores to accentuate differences' do

@@ -4,9 +4,9 @@ describe ByGenderScorer do
 	describe '.score' do
 		context 'with valid arguments' do
 			let (:alice) {build(:person)}
-			let (:bob) 	 {build(:person, gender: :man)}
-			let (:carol) {build(:person)}
-			let (:dan)   {build(:person, gender: :trans)}
+			let (:bob) 	 {build(:bob)}
+			let (:carol) {build(:carol)}
+			let (:dan)   {build(:dan)}
 
 
 			subject {ByGenderScorer.score([[alice, bob],[alice, carol], [alice, dan],
