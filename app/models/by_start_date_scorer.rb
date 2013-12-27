@@ -1,8 +1,8 @@
-class ByStartDateScorer
-  def self.score groups
+class ByStartDateScorer < ScoreTransformer
+  def self.score groups 
     group_distance_mapping = map_distances groups
     group_score_mapping = score_distances group_distance_mapping
-    ScoreTransformer.transform group_score_mapping
+    transform group_score_mapping
   end
 
   private
