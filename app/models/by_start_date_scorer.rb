@@ -14,13 +14,4 @@ class ByStartDateScorer < ScoreTransformer
       end
       group_distance_mapping
     end
-
-    def self.score_distances group_distance_mapping
-      greatest_distance = group_distance_mapping.values.max
-      group_score_mapping = {}
-      group_distance_mapping.keys.each do |group|
-        group_score_mapping[group] = group_distance_mapping[group] / greatest_distance
-      end
-      group_score_mapping
-    end
 end
