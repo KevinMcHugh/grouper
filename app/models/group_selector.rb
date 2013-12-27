@@ -9,7 +9,7 @@ class GroupSelector
   end
 
   private
-    def self.scorers; [ByGenderScorer, ByStartDateScorer]; end
+    def self.scorers; [ByGenderScorer, ByStartDateScorer, ByPreviousGroupsScorer]; end
 
     def self.get_scores people
       combinations = people.combination(group_size).to_a
