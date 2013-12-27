@@ -10,7 +10,7 @@ describe ByPreviousGroupsScorer do
 			let (:group) {build(:group, people: [alice, bob])}
 
 			subject {ByPreviousGroupsScorer.score([[alice, bob],[alice, carol], [alice, dan],
-											  [bob, carol], [bob, dan], [carol, dan]])}
+					[bob, carol], [bob, dan], [carol, dan]])}
 			before(:each) do 
 				alice.groups = [group]
 				bob.groups = [group]
