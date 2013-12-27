@@ -19,4 +19,10 @@ FactoryGirl.define do
     gender :trans
     start "2010-01-01"
   end
+  factory :group do
+  end
+  factory :event do
+    name 'test_event'
+    groups [group]
+  end
 end
