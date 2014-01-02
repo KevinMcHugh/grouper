@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
   def to_s; inspect; end
 
   def == other_person
+    return false if other_person.class != self.class
     names = other_person.name == name
     genders = other_person.gender == gender
     starts = other_person.start == start
