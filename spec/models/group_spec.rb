@@ -17,7 +17,7 @@ describe Group do
   end
 
   describe '#inspect' do
-    let (:alice) {Person.new({name: "alice", gender: :woman, start: Date.iso8601("2009-01-01")})}
+    let (:alice) {build(:person)}
     subject{Group.new({people: [alice]}).inspect}
     context 'it returns the peoples names'
     it {should == ['alice']}

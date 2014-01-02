@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe Person do
-  let (:alice) {Person.new({name: "alice", gender: :woman, start: Date.iso8601("2010-01-01")})}
-  let (:bob)   {Person.new({name: "bob",   gender: :man,   start: Date.iso8601("2013-01-01")})}
-  let (:dan)   {Person.new({name: "dan",   gender: :trans, start: Date.iso8601("2013-01-01")})}
+  let (:alice) {build(:person)}
+  let (:bob) {build(:bob)}
+  let (:dan) {build(:dan)}
 
   describe '#new' do
-    subject {Person.new({gender: "man"})}
+    subject {bob}
     it 'should symbolize the argument' do
       expect(subject.man?).to be_true
       expect(subject.woman?).to be_false
@@ -57,8 +57,6 @@ describe Person do
 
   describe '#==' do
     subject {build(:person)}
-    let(:alice) {build(:person)}
-    let(:bob) {build(:bob)}
 
     context 'when objects are equal' do
       it {should == alice}
