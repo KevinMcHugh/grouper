@@ -1,11 +1,6 @@
-class ByPreviousGroupsScorer < ScoreTransformer
+class ByPreviousGroupsScorer < ScorerLoop
   def self.score groups
-    group_score_mappings = {}
-    groups.each do |people|
-      score = score_people(people) / people.length
-      group_score_mappings[people] = score
-    end
-    transform score_distances(group_score_mappings)
+    score_loop(groups){|people| score_people(people) / people.length}
   end
 
   private

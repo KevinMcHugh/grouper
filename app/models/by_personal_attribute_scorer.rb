@@ -1,10 +1,8 @@
-class ByPersonalAttributeScorer < ScoreTransformer
+class ByPersonalAttributeScorer < ScorerLoop
   def self.score groups, attribute
-    group_distance_mappings = {}
-    groups.each do |group|
-      attributes = group.map {|person| person.attributes[attribute]}.uniq
-      group_distance_mappings[group] = attributes.length.to_f / group.length
+    score_loop(groups) do |people|
+      attributes = people.map {|person| person.attributes[attribute]}.uniq
+      attributes.length.to_f / people.length
     end
-    transform score_distances(group_distance_mappings)
   end
 end
