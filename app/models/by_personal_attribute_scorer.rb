@@ -1,6 +1,6 @@
 class ByPersonalAttributeScorer < ScorerLoop
-  def self.score groups, attribute
-    score_loop(groups) do |people|
+  def self.score people_arrays, attribute
+    score_loop(people_arrays) do |people|
       attributes = people.map {|person| person.attributes[attribute]}.uniq
       attributes.length.to_f / people.length
     end

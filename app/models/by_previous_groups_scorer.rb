@@ -1,6 +1,6 @@
 class ByPreviousGroupsScorer < ScorerLoop
-  def self.score groups
-    score_loop(groups){|people| score_people(people) / people.length}
+  def self.score people_arrays
+    score_loop(people_arrays){|people| score_people(people) / people.length}
   end
 
   private
