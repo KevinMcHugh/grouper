@@ -21,7 +21,7 @@ FactoryGirl.define do
     name "dan"
     gender :trans
     team 'bteam'
-    start "2010-01-01"
+    start "2009-01-01"
   end
   factory :group do
     people {[create(:person), create(:bob), create(:carol), create(:dan)]}
