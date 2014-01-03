@@ -14,13 +14,13 @@ FactoryGirl.define do
   factory :carol, class: Person do
     name "carol"
     gender :woman
-    team 'ateam'
+    team 'cteam'
     start "2010-01-01"
   end
   factory :dan, class: Person do
     name "dan"
     gender :trans
-    team 'bteam'
+    team 'dteam'
     start "2009-01-01"
   end
   factory :group do
