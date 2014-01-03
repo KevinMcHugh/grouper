@@ -1,7 +1,3 @@
-class ByTeamScorer
-  def self.score people_arrays
-    ByPersonalAttributeScorer.score people_arrays, team
-  end
-
-  def self.team; 'team'; end
+class ByTeamScorer < ByPersonalAttributeScorer
+  def self.attribute; 'team'; end
 end
