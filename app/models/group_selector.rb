@@ -9,14 +9,26 @@ class GroupSelector
   end
 
   private
-    def self.scorers; [ByGenderScorer, ByStartDateScorer, ByPreviousGroupsScorer]; end
+    def self.scorers
+     [ByGenderScorer, ByStartDateScorer,
+      ByPreviousGroupsScorer, ByTeamScorer]
+    end
 
     def self.get_scores people
       combinations = people.combination(group_size).to_a
-      scorers.map do |scorer|
-        scores = scorer.score combinations
-        scores.sort_by {|s| s[:score]}
-      end.flatten
+      flat_scores = scorers.map do |scorer|
+        scorer.score combinations
+      end.flatten.sort_by {|s| s[:score]}
+      combine flat_scores
+    end
+
+    def self.combine flat_scores
+      grouped_scores = flat_scores.group_by {|s| s[:group]}
+      grouped_scores.values.map do |score_mappings|
+        score_mappings.reduce do |a, i|
+          {group: a[:group], score: (a[:score] + i[:score])}
+        end
+      end
     end
 
     def self.add_to_groups_and_remove_from_to_place group, groups, to_place

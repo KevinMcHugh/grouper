@@ -5,9 +5,10 @@ describe ByTeamScorer do
     context 'with valid arguments' do
       let (:alice) {build(:person)}
       let (:bob)   {build(:bob)}
-      let (:carol) {build(:carol)}
-      let (:dan)   {build(:dan)}
+
       context 'with 2 person groups' do
+        let (:carol) {build(:carol, team: 'ateam')}
+        let (:dan)   {build(:dan, team: 'bteam')}
         subject {ByTeamScorer.score([[alice, bob],[alice, carol], [alice, dan],
                           [bob, carol], [bob, dan], [carol, dan]])}
         it 'scores to accentuate differences' do
@@ -20,6 +21,8 @@ describe ByTeamScorer do
         end
       end
       context 'with 4 person groups' do
+        let (:carol) {build(:carol)}
+        let (:dan)   {build(:dan)}
         let (:e)   {build(:person, name: "e")}
         let (:g)   {build(:carol, name: "g")}
         let (:diverse_group) {[alice,bob,carol,dan]}
