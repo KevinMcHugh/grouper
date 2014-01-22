@@ -28,6 +28,6 @@ FactoryGirl.define do
   end
   factory :event do
     name 'test_event'
-    groups [group]
+    groups {[create(:group)]}
   end
 end
