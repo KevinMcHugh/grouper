@@ -1,4 +1,4 @@
-class PersonUploader
+class PeopleUploader
 
   def upload yaml
     create_people parse(yaml)
