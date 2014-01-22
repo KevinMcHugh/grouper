@@ -1,7 +1,9 @@
-%h1 EVENT
+%h1 Event
 %p
   #{@event.name}
 -@event.groups.each do |group|
   %p group
   -group.people.each do |person|
     %li #{person.name}
+
+= link_to 'Delete', event_path(@event), method: :delete
