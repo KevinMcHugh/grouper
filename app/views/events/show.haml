@@ -1,9 +1,9 @@
 %h1 Event
-%p
-  #{@event.name}
--@event.groups.each do |group|
-  %p group
-  -group.people.each do |person|
-    %li #{person.name}
+%p #{@event.name}
+%table
+  -@group_table.each do |row|
+    %tr
+    -row.each do |cell|
+      %td= cell
 
-= link_to 'Delete', event_path(@event), method: :delete
+%p= link_to 'Delete', event_path(@event), method: :delete
