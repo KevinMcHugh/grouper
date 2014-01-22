@@ -1,6 +1,7 @@
 %table{:border => 1}
   %tr
     %th Name
+    %th Email Address
     %th Gender
     %th Hire Date
     %th Team
@@ -8,6 +9,7 @@
   - @people.each do |person|
     %tr
       %td= link_to person.name, person_path(person)
+      %td #{person.email_address}
       %td #{person.gender}
       %td #{person.start}
       %td #{person.team}
