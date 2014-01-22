@@ -18,8 +18,8 @@ class GroupSelector
       combinations = people.combination(group_size).to_a
       flat_scores = scorers.map do |scorer|
         scorer.score combinations
-      end.flatten.sort_by {|s| s[:score]}
-      combine flat_scores
+      end.flatten
+      combine(flat_scores).sort_by {|s| s[:score]}
     end
 
     def self.combine flat_scores
@@ -37,7 +37,7 @@ class GroupSelector
     end
 
     def self.next_group scores, to_place
-      group = scores.find { |group| (group[:group] - to_place).empty? }
+      group = scores.find { |g| (g[:group] - to_place).empty? }
       return group[:group] unless group.nil? || group.empty?
       to_place
     end
