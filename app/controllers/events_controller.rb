@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    groups = GroupSelector.select(Person.all)
+    groups = GroupSelector.select(Person.all.to_a)
     params.merge!({groups: groups})
     @event = Event.new(event_params)
     @event.save

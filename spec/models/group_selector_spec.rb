@@ -13,8 +13,8 @@ describe GroupSelector do
 
     context 'with no previous groups' do
       context 'and an even number of people' do
-        let(:group1) {Group.new people: [alice,dan,f,g]}
-        let(:group2) {Group.new people: [bob,carol,e,h]}
+        let(:group1) {Group.new people: [e,f,g,h]}
+        let(:group2) {Group.new people: [alice,bob,carol,dan]}
         subject{GroupSelector.select [alice,bob,carol,dan,e,f,g,h]}
         it 'selects the most diverse groups' do
           expect(subject).to match_array [group1, group2]
@@ -22,8 +22,8 @@ describe GroupSelector do
       end
 
       context 'and an odd number of people' do
-        let(:group1) {Group.new people: [alice,bob,g]}
-        let(:group2) {Group.new people: [carol,dan,e,f]}
+        let(:group1) {Group.new people: [dan,e,f,g]}
+        let(:group2) {Group.new people: [alice,bob,carol]}
         let (:result) {[group1,group2]}
         subject{GroupSelector.select [alice,bob,carol,dan,e,f,g]}
         it 'selects the most diverse groups' do
@@ -32,12 +32,28 @@ describe GroupSelector do
       end
     end
 
+    context "Rob's weird test" do
+      let (:rob) {build(:rob)}
+      let (:colin) {build(:colin)}
+      let (:george) {build(:george)}
+      let (:p1) {build(:p1)}
+      let (:p2) {build(:p2)}
+      let (:p3) {build(:p3)}
+      let (:p4) {build(:p4)}
+      let (:group1) {Group.new people: [rob, george, p2, p3]}
+      let (:group2) {Group.new people: [colin, p1, p4]}
+      subject{GroupSelector.select [rob, colin, george, p1, p2, p3, p4]}
+      it "doesn't repeat people" do
+        expect(subject).to match_array [group1, group2]
+      end
+    end
+
     context 'with previous groups' do
       let(:group1) {build(:group)}
       let(:group2) {build(:group, people: [e,f,g,h])}
 
-      let(:rgroup1) {Group.new people: [alice,carol,f,h]}
-      let(:rgroup2) {Group.new people: [bob,dan,e,g]}
+      let(:rgroup1) {Group.new people: [alice,bob,g,h]}
+      let(:rgroup2) {Group.new people: [carol,dan,e,f]}
       let(:result) {[rgroup1, rgroup2]}
       before(:each) do
         [alice,bob,carol,dan].map {|p| p.groups = [group1]}
