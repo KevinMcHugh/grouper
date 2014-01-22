@@ -32,8 +32,9 @@ class GroupSelector
     end
 
     def self.add_to_groups_and_remove_from_to_place group, groups, to_place
-      groups << group.clone
-      to_place.delete_if {|p| group.include? p }
+      clone = group.clone
+      groups << clone
+      to_place.delete_if {|p| clone.include? p }
     end
 
     def self.next_group scores, to_place
@@ -45,7 +46,7 @@ class GroupSelector
     def self.place groups, scores, to_place
       while !to_place.empty? do
         group = next_group scores, to_place
-        add_to_groups_and_remove_from_to_place group, groups, to_place
+        add_to_groups_and_remove_from_to_place group.to_a, groups, to_place
       end
       groups.map {|group| Group.new(people: group)}
     end

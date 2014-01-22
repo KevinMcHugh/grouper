@@ -1,0 +1,9 @@
+%table
+  - @people.each do |person|
+    %tr
+      %td #{person.name}
+      %td #{person.gender}
+      %td #{person.start}
+      %td #{person.team}
+      %td= link_to 'Delete', person_path(person), method: :delete
+      %td= link_to 'Edit', edit_person_path(person)
