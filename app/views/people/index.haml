@@ -1,13 +1,5 @@
-%h1 People
+%h1 All People
 
-%table
-  - @people.each do |person|
-    %tr
-      %td #{person.name}
-      %td #{person.gender}
-      %td #{person.start}
-      %td #{person.team}
-      %td= link_to 'Delete', person_path(person), method: :delete
-      %td= link_to 'Edit', edit_person_path(person)
+= render "shared/people"
 
 = link_to 'Create a new person', new_person_path
