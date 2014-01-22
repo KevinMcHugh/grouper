@@ -7,3 +7,4 @@
       %td= cell
 
 %p= link_to 'Delete', event_path(@event), method: :delete
+%p= link_to 'Send Email', send_email_event_path(@event), method: :post

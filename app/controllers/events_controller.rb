@@ -31,6 +31,16 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def send_email
+    @event = Event.find(params[:id])
+    EventMailer.event_mail(@event)
+    redirect_to email_sent_event_path
+  end
+
+  def email_sent
+    @event = Event.find(params[:id])
+  end
+
   private 
   def event_params
     params.required(:event).permit(:groups, :name)
