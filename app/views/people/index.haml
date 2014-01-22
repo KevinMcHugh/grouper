@@ -1,8 +1,13 @@
-- @people.each do |person|
-  %p
-    #{person.name}
-    #{person.gender}
-    #{person.start}
-    #{person.team}
-    = link_to 'Delete', person_path(person), method: :delete
-    = link_to 'Edit', edit_person_path(person), method: :edit
+%h1 People
+
+%table
+  - @people.each do |person|
+    %tr
+      %td #{person.name}
+      %td #{person.gender}
+      %td #{person.start}
+      %td #{person.team}
+      %td= link_to 'Delete', person_path(person), method: :delete
+      %td= link_to 'Edit', edit_person_path(person)
+
+= link_to 'Create a new person', new_person_path
