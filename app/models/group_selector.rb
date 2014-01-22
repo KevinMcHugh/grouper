@@ -48,7 +48,7 @@ class GroupSelector
         group = next_group scores, to_place
         add_to_groups_and_remove_from_to_place group, groups, to_place
       end
-      groups.map {|group| Group.new(people: group)}
+      groups.map {|g| Group.new(people: g)}
     end
     def self.group_size; 4; end
 end
