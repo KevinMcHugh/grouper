@@ -1,11 +1,15 @@
 %h1 Events
 
--@events.each do |event|
-  %li
-    #{event.name}
-  -event.groups.each do |group|
-    %p group
-    -group.people.each do |person|
-      %li #{person.name}
+%table{:border => 1}
+  %tr
+    %th Event Name
+    %th Number of Groups
+    %th{:colspan => 2} Actions
+  -@events.each do |event|
+    %tr
+      %td #{event.name}
+      %td{:align => :center} #{event.groups.size}
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Delete', event_path(event), method: :delete
 
 = link_to 'Create an event', new_event_path
