@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   has_and_belongs_to_many   :people
 
   def == other
-    other.event == event && other.people == people
+    other.event == event && (other.people - people) == (people - other.people)
   end
 
   def inspect; people.map {|p| p.name}; end

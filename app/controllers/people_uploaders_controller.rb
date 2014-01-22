@@ -1,7 +1,7 @@
 class PeopleUploadersController < ApplicationController
   def create
-    person_uploader = PersonUploader.new
+    people_uploader = PeopleUploader.new
     file = params["people_uploader"]["file"].read
-    @people = person_uploader.upload file
+    @people = people_uploader.upload file
   end
 end
