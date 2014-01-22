@@ -6,6 +6,7 @@ Grouper::Application.routes.draw do
 
   resources :people
   resources :events
+  resources :people_uploaders
   root 'welcome#index'
 
   # Example of regular route:
