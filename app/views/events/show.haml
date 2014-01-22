@@ -1,6 +1,6 @@
 %h1 Event
 %p #{@event.name}
-%table
+%table{:border => 1}
   -@group_table.each do |row|
     %tr
     -row.each do |cell|

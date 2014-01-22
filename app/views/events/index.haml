@@ -4,12 +4,11 @@
   %tr
     %th Event Name
     %th Number of Groups
-    %th{:colspan => 2} Actions
+    %th Actions
   -@events.each do |event|
     %tr
-      %td #{event.name}
+      %td= link_to event.name, event_path(event)
       %td{:align => :center} #{event.groups.size}
-      %td= link_to 'Edit', edit_event_path(event)
       %td= link_to 'Delete', event_path(event), method: :delete
 
 = link_to 'Create an event', new_event_path
