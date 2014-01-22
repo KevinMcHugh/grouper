@@ -1,0 +1,6 @@
+%body
+  %h1 People uploader!
+  = form_for :people_uploader, url: people_uploaders_path, :multipart=>true do |f|
+    = f.file_field :file
+    %br
+    = submit_tag "Import!"
