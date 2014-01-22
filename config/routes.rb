@@ -4,7 +4,12 @@ Grouper::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   resources :people
-  resources :events
+  resources :events do
+    member do
+      post :send_email
+      get :email_sent
+    end
+  end
   resources :people_uploaders
   resources :events_uploaders
   root 'welcome#index'
