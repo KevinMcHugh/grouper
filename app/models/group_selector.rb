@@ -46,7 +46,7 @@ class GroupSelector
     def self.place groups, scores, to_place
       while !to_place.empty? do
         group = next_group scores, to_place
-        add_to_groups_and_remove_from_to_place group.to_a, groups, to_place
+        add_to_groups_and_remove_from_to_place group, groups, to_place
       end
       groups.map {|group| Group.new(people: group)}
     end
