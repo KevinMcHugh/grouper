@@ -12,12 +12,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     if !@event.groups.empty?
-      group_text = @event.groups.map.with_index(1) do |g, i|
-        ["Group #{i}"] + g.people.map {|p| p.name}
-      end
-      max_size = group_text.max {|r1, r2| r1.size <=> r2.size}.size
-      group_text.each {|r| r[max_size - 1] ||= nil }
-      @group_table = group_text.transpose
+      @group_table = GroupTable.create @event
     end
     @people = @event.people
   end

@@ -11,7 +11,7 @@ class ByPreviousGroupsScorer < ScorerLoop
   private
     def self.score_people people, people_to_previous_group_members
       already_scored = []
-      x = people.map do |person|
+      people.map do |person|
         already_scored << person
         to_score = people - already_scored
         score_person person, to_score, people_to_previous_group_members[person]
