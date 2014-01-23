@@ -23,10 +23,8 @@ class EventsController < ApplicationController
   def create_groups
     @event = Event.find(params[:id])
     groups = GroupSelector.select(@event.people.to_a)
-    groups.each do |group|
-      @event.add_group group
-      group.save
-    end
+    @event.groups = groups
+    groups.map &:save
     @event.save
     redirect_to event_path(@event)
   end

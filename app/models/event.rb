@@ -19,9 +19,9 @@ class Event < ActiveRecord::Base
     people << person unless people.include? person
   end
 
-  def add_group group
-    groups << group unless groups.include? group
-    group.event = self
+  def add_groups new_groups
+    self.groups = new_groups
+    self.groups.map { |group| group.event = self }
   end
 
   def remove_person person
