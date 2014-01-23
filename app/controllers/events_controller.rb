@@ -12,7 +12,7 @@ class EventsController < ApplicationController
       group.event = @event
       group.save
     end
-    redirect_to @event
+    redirect_to events_path(@event)
   end
 
   def show
