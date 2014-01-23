@@ -3,7 +3,7 @@ class GroupSelector
     scores = get_scores people
     to_place = people
     groups = []
-    first_group = scores.last[:group]
+    first_group = scores.first[:group]
     add_to_groups_and_remove_from_to_place first_group, groups, to_place
     place groups, scores, to_place
   end
@@ -15,11 +15,15 @@ class GroupSelector
     end
 
     def self.get_scores people
+      now = Time.now
       combinations = people.combination(group_size).to_a
       flat_scores = scorers.map do |scorer|
-        scorer.score combinations
+        puts "starting #{scorer}------------------------------"
+        x = scorer.score combinations
+        now = log_time
+        x
       end.flatten
-      combine(flat_scores).sort_by {|s| s[:score]}
+      combine(flat_scores).sort_by {|s| -s[:score]}
     end
 
     def self.combine flat_scores
@@ -44,6 +48,7 @@ class GroupSelector
     end
 
     def self.place groups, scores, to_place
+      now = Time.now 
       while !to_place.empty? do
         group = next_group scores, to_place
         add_to_groups_and_remove_from_to_place group, groups, to_place
@@ -51,4 +56,12 @@ class GroupSelector
       groups.map {|g| Group.new(people: g)}
     end
     def self.group_size; 4; end
+
+    def self.log_time now
+      later = Time.now 
+      puts "completed in:=============================================="
+      puts later - now
+      later
+    end
+
 end
