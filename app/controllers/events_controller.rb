@@ -10,11 +10,8 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
-    if !@event.groups.empty?
-      @group_table = GroupTable.create @event
-    end
-    @people = @event.people
+    event = Event.find(params[:id])
+    @event_dto = EventDTO.new event
   end
 
   def destroy

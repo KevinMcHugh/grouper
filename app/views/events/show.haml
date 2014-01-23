@@ -1,5 +1,5 @@
 %h1 Event
-%h3 Name: #{@event.name}
+%h3 Name: #{@event_dto.name}
 %h3 People
 %table{:border => 1, :class => 'table table-striped'}
   %tr
@@ -9,25 +9,25 @@
     %th Hire Date
     %th Team
     %th Actions
-  - @people.each do |person|
+  - @event_dto.people.each do |person|
     %tr
       %td= link_to person.name, person_path(person)
       %td #{person.email_address}
       %td #{person.gender}
       %td #{person.start}
       %td #{person.team}
-      %td= link_to 'Remove', remove_person_event_path(id: @event, person_id: person)
+      %td= link_to 'Remove', remove_person_event_path(id: @event_dto.id, person_id: person)
 
-= if @group_table
+= if @event_dto.group_table
   %h3 Groups:
   %table{:border => 1, :class => 'table table-striped'}
-    -@group_table.each do |row|
+    -@event_dto.group_table.each do |row|
       %tr
       -row.each do |cell|
         %td= cell
 
-%p= link_to 'Announce This Event!', announce_event_path(@event), method: :post
-%p= link_to 'Add Everyone To Event', add_all_people_event_path(@event)
-%p= link_to 'Create Groups', create_groups_event_path(@event)
-%p= link_to 'Send Email To Groups', send_email_event_path(@event), method: :post
-%p= link_to 'Delete', event_path(@event), method: :delete
+%p= link_to 'Announce This Event!', announce_event_path(@event_dto.id), method: :post
+%p= link_to 'Add Everyone To Event', add_all_people_event_path(@event_dto.id)
+%p= link_to 'Create Groups', create_groups_event_path(@event_dto.id)
+%p= link_to 'Send Email To Groups', send_email_event_path(@event_dto.id), method: :post
+%p= link_to 'Delete', event_path(@event_dto.id), method: :delete
