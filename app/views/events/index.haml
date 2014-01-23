@@ -3,11 +3,13 @@
 %table{:border => 1, :class => 'table table-striped'}
   %tr
     %th Event Name
+    %th Number of People
     %th Number of Groups
     %th Actions
   -@events.each do |event|
     %tr
       %td= link_to event.name, event_path(event)
+      %td{:align => :center} #{event.people.size}
       %td{:align => :center} #{event.groups.size}
       %td= link_to 'Delete', event_path(event), method: :delete
 
