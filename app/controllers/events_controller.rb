@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.save
-    redirect_to events_path(@event)
+    redirect_to event_path(@event)
   end
 
   def show
@@ -30,8 +30,6 @@ class EventsController < ApplicationController
 
   def create_groups
     @event = Event.find(params[:id])
-    # puts "!!!!!!!!!"
-    # puts @event.people
     groups = GroupSelector.select(@event.people.to_a)
     @event.groups = groups
     @event.save
@@ -39,19 +37,43 @@ class EventsController < ApplicationController
       group.event = @event
       group.save
     end
-    redirect_to events_path(@event)
+    redirect_to event_path(@event)
   end
-
+  
   def add_all_people
     @event = Event.find(params[:id])
     @event.people = Person.all
     @event.save
-    redirect_to events_path(@event)
+    redirect_to event_path(@event)
+  end
+
+  def add_person
+    @event = Event.find(params[:id])
+    person = Person.find(params[:person_id])
+    @event.people << person
+    @event.save
+    render 'thanks'
+  end
+
+  def remove_person
+    @event = Event.find(params[:id])
+    person = Person.find(params[:person_id])
+    people = @event.people.to_a
+    people.delete_if {|p| p == person}
+    @event.people = people
+    @event.save
+    redirect_to event_path(@event)
+  end
+
+  def announce
+    @event = Event.find(params[:id])
+    EventMailer.announcement_mail @event, Person.all.to_a
+    redirect_to email_sent_event_path
   end
 
   def send_email
     @event = Event.find(params[:id])
-    EventMailer.event_mail(@event)
+    EventMailer.event_mail @event
     redirect_to email_sent_event_path
   end
 
