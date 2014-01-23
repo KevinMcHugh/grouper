@@ -24,6 +24,13 @@ class Event < ActiveRecord::Base
     group.event = self
   end
 
+  def remove_person person
+    temp_people = people.to_a
+    temp_people.delete_if {|p| p == person}
+    puts temp_people
+    self.people = temp_people
+  end
+
   def == other
     equal_names = other.name == name
     equal_groups = (other.groups - groups) && (groups - other.groups)
