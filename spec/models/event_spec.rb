@@ -11,9 +11,12 @@ describe Event do
         expect(subject.people.map(&:name)).to match_array(event1.people.map(&:name))
       end
     end
-    context "#add_group" do
+    context "#add_groups" do
       let(:group) {Group.new}
-      subject {Event.new.add_group group}
+      subject {Event.new}
+      before(:each) do
+        subject.add_groups [group]
+      end
       it "sets itself on the group" do
         expect(subject.groups).to match_array [group]
         expect(subject).to eq group.event
