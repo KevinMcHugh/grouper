@@ -27,7 +27,6 @@ class Event < ActiveRecord::Base
   def remove_person person
     temp_people = people.to_a
     temp_people.delete_if {|p| p == person}
-    puts temp_people
     self.people = temp_people
   end
 
