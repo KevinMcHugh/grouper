@@ -22,8 +22,8 @@ describe GroupSelector do
       end
 
       context 'and an odd number of people' do
-        let(:group1) {Group.new people: [dan,e,f,g]}
-        let(:group2) {Group.new people: [alice,bob,carol]}
+        let(:group1) {Group.new people: [e,f,g]}
+        let(:group2) {Group.new people: [alice,bob,carol, dan]}
         let (:result) {[group1,group2]}
         subject{GroupSelector.select [alice,bob,carol,dan,e,f,g]}
         it 'selects the most diverse groups' do
@@ -32,25 +32,11 @@ describe GroupSelector do
       end
     end
 
-    context "Rob's weird test" do
-      let (:rob) {build(:rob)}
-      let (:colin) {build(:colin)}
-      let (:george) {build(:george)}
-      let (:p1) {build(:p1)}
-      let (:p2) {build(:p2)}
-      let (:p3) {build(:p3)}
-      let (:p4) {build(:p4)}
-      let (:group1) {Group.new people: [rob, george, p2, p3]}
-      let (:group2) {Group.new people: [colin, p1, p4]}
-      subject{GroupSelector.select [rob, colin, george, p1, p2, p3, p4]}
-      it "doesn't repeat people" do
-        expect(subject).to match_array [group1, group2]
-      end
-    end
-
     context 'with previous groups' do
       let(:group1) {build(:group)}
       let(:group2) {build(:group, people: [e,f,g,h])}
+      let (:event) {create(:event, groups: [group1, group2])}
+
 
       let(:rgroup1) {Group.new people: [alice,bob,g,h]}
       let(:rgroup2) {Group.new people: [carol,dan,e,f]}
@@ -58,6 +44,7 @@ describe GroupSelector do
       before(:each) do
         [alice,bob,carol,dan].map {|p| p.groups = [group1]}
         [e,f,g,h].map {|p| p.groups = [group2]}
+        Event.stub(:last).and_return([event])
       end
       subject{GroupSelector.select [alice,bob,carol,dan,e,f,g,h]}
       it 'does not produce the previous group' do

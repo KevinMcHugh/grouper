@@ -10,18 +10,14 @@ class GroupSelector
 
   private
     def self.scorers
-     [ByGenderScorer, ByStartDateScorer,
-      ByPreviousGroupsScorer, ByTeamScorer]
+      [ByGenderScorer, ByStartDateScorer,
+        ByPreviousGroupsScorer, ByTeamScorer]
     end
 
     def self.get_scores people
-      now = Time.now
       combinations = people.combination(group_size).to_a
       flat_scores = scorers.map do |scorer|
-        puts "starting #{scorer}------------------------------"
-        x = scorer.score combinations
-        now = log_time
-        x
+        scorer.score combinations
       end.flatten
       combine(flat_scores).sort_by {|s| -s[:score]}
     end
@@ -48,7 +44,6 @@ class GroupSelector
     end
 
     def self.place groups, scores, to_place
-      now = Time.now 
       while !to_place.empty? do
         group = next_group scores, to_place
         add_to_groups_and_remove_from_to_place group, groups, to_place
@@ -56,12 +51,4 @@ class GroupSelector
       groups.map {|g| Group.new(people: g)}
     end
     def self.group_size; 4; end
-
-    def self.log_time now
-      later = Time.now 
-      puts "completed in:=============================================="
-      puts later - now
-      later
-    end
-
 end
