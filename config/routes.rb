@@ -8,6 +8,8 @@ Grouper::Application.routes.draw do
     member do
       post :send_email
       get :email_sent
+      get :add_all_people
+      get :create_groups
     end
   end
   resources :people_uploaders
