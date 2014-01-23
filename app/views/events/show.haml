@@ -1,10 +1,17 @@
 %h1 Event
-%p #{@event.name}
-%table{:border => 1, :class => 'table table-striped'}
-  -@group_table.each do |row|
-    %tr
-    -row.each do |cell|
-      %td= cell
+%p Name: #{@event.name}
+%p People
+= render "shared/people"
+
+= if @group_table
+  %p Groups:
+  %table{:border => 1, :class => 'table table-striped'}
+    -@group_table.each do |row|
+      %tr
+      -row.each do |cell|
+        %td= cell
 
 %p= link_to 'Delete', event_path(@event), method: :delete
+%p= link_to 'Create Groups', create_groups_event_path(@event)
+%p= link_to 'Add Everyone To Event', add_all_people_event_path(@event)
 %p= link_to 'Send Email', send_email_event_path(@event), method: :post
