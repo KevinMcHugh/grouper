@@ -68,7 +68,9 @@ class EventsController < ApplicationController
 
   def send_email
     @event = Event.find(params[:id])
-    EventMailer.event_mail @event
+    @event.groups.map do |group|
+      EventMailer.group_mail(group, @event.name).deliver
+    end
     redirect_to email_sent_event_path
   end
 
