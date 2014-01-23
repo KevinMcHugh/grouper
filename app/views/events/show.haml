@@ -1,10 +1,10 @@
 %h1 Event
-%p Name: #{@event.name}
-%p People
+%h3 Name: #{@event.name}
+%h3 People
 = render "shared/people"
 
 = if @group_table
-  %p Groups:
+  %h3 Groups:
   %table{:border => 1, :class => 'table table-striped'}
     -@group_table.each do |row|
       %tr
