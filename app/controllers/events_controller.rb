@@ -48,9 +48,7 @@ class EventsController < ApplicationController
   def remove_person
     @event = Event.find(params[:id])
     person = Person.find(params[:person_id])
-    people = @event.people.to_a
-    people.delete_if {|p| p == person}
-    @event.people = people
+    @event.remove_person person
     @event.save
     redirect_to event_path(@event)
   end
