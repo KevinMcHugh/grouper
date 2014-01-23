@@ -1,7 +1,8 @@
+%h1 Create Event
 = form_for :event, url: events_path do |f|
   %p
   = f.label :name
   %br
   = f.text_field :name
   %p.button
-  = f.submit
+  = f.submit :class => "btn btn-primary"
