@@ -1,6 +1,6 @@
 %h1 Event
 %p #{@event.name}
-%table{:border => 1}
+%table{:border => 1, :class => 'table table-striped'}
   -@group_table.each do |row|
     %tr
     -row.each do |cell|
