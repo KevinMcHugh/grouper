@@ -7,13 +7,16 @@ class Event < ActiveRecord::Base
 
   def copy_people_from_previous_event
     if people.empty?
-      previous_event = Event.last(2).first
       self.people = previous_event.people
     end
   end
 
+  def previous_event
+    previous_event = Event.last(2).first
+  end
+
   def add_person person
-    people << person
+    people << person unless people.include? person
   end
 
   def == other

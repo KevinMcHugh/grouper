@@ -6,11 +6,15 @@ class EventMailer < ActionMailer::Base
     end
   end
 
-  def announcement_mail event, people
-    people.each do |person|
-      @person = person
-      @event = event
-      mail(to: person.email_address, subject: event.name).deliver
-    end
+  def opt_in_mail event, person
+    @person = person
+    @event = event
+    mail(to: person.email_address, subject: event.name)
+  end
+
+  def opt_out_mail event, person
+    @person = person
+    @event = event
+    mail(to: person.email_address, subject: event.name)
   end
 end
