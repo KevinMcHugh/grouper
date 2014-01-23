@@ -16,8 +16,7 @@
       %td #{person.gender}
       %td #{person.start}
       %td #{person.team}
-      %td= link_to 'Remove', remove_person_event_path(id: @event, person_id: person), method: :post
-
+      %td= link_to 'Remove', remove_person_event_path(id: @event, person_id: person)
 
 = if @group_table
   %h3 Groups:

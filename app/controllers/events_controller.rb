@@ -50,9 +50,8 @@ class EventsController < ApplicationController
   def add_person
     @event = Event.find(params[:id])
     person = Person.find(params[:person_id])
-    @event.people << person
+    @event.add_person person
     @event.save
-    render 'thanks'
   end
 
   def remove_person
@@ -67,7 +66,14 @@ class EventsController < ApplicationController
 
   def announce
     @event = Event.find(params[:id])
-    EventMailer.announcement_mail @event, Person.all.to_a
+    went_last_time = @event.previous_event.people.to_a
+    went_last_time.map do |person|
+      EventMailer.opt_out_mail(@event, person).deliver
+    end
+    others = Person.all.to_a - went_last_time
+    others.map do |person|
+      EventMailer.opt_in_mail(@event, person).deliver
+    end
     redirect_to email_sent_event_path
   end
 
