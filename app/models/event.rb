@@ -12,6 +12,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def add_person person
+    people << person
+  end
+
   def == other
     equal_names = other.name == name
     equal_groups = (other.groups - groups) && (groups - other.groups)
