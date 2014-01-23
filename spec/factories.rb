@@ -74,5 +74,6 @@ FactoryGirl.define do
   factory :event do
     name 'test_event'
     groups {[create(:group)]}
+    people {[create(:person), create(:bob), create(:carol), create(:dan)]}
   end
 end
