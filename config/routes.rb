@@ -7,6 +7,9 @@ Grouper::Application.routes.draw do
   resources :events do
     member do
       post :send_email
+      post :announce
+      post :remove_person
+      post :add_person
       get :email_sent
       get :add_all_people
       get :create_groups
