@@ -65,5 +65,5 @@ describe Person do
     context 'when objects are not equal' do
       it {should_not == bob}
     end
-  end 
+  end
 end

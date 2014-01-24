@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 
 describe ByPreviousGroupsScorer do
   describe '.score' do
@@ -11,8 +11,9 @@ describe ByPreviousGroupsScorer do
         let (:group) {build(:group, people: [alice, bob])}
         let (:event) {create(:event, groups: [group])}
 
-        subject {ByPreviousGroupsScorer.score([[alice, bob],[alice, carol], [alice, dan],
-            [bob, carol], [bob, dan], [carol, dan]])}
+        subject {ByPreviousGroupsScorer.score([[alice, bob],
+          [alice, carol], [alice, dan],[bob, carol], [bob, dan], 
+          [carol, dan]])}
         before(:each) do
           alice.groups = [group]
           bob.groups = [group]
@@ -48,7 +49,8 @@ describe ByPreviousGroupsScorer do
           [e,f,g,h].map {|p| p.groups = [group2]}
           Event.stub(:last).and_return([event])
         end
-        subject {ByPreviousGroupsScorer.score [[alice,bob,carol,dan], [e,f,g,h], [alice,f,carol,h]]}
+        subject {ByPreviousGroupsScorer.score [[alice,bob,carol,dan], 
+          [e,f,g,h], [alice,f,carol,h]]}
         it 'gives score <0 and > 1' do
           expect(subject).to match_array result
         end

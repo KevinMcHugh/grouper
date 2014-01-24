@@ -11,9 +11,10 @@ describe EventDTO do
     end
     context 'when there are groups' do
       let(:event) {build :event}
+      let(:result) {[["Group 1"], ["alice"], ["bob"], ["carol"], ["dan"]]}
       subject {EventDTO.new event}
       it 'returns a properly transposed array' do
-        expect(subject.group_table).to match_array [["Group 1"], ["alice"], ["bob"], ["carol"], ["dan"]]
+        expect(subject.group_table).to match_array result
       end
     end
   end
@@ -23,7 +24,7 @@ describe EventDTO do
       subject {EventDTO.new event}
       it 'has an empty array' do
         expect(subject.people).to be_empty
-      end 
+      end
     end
     context 'when there are people' do
       let(:event) {build :event}

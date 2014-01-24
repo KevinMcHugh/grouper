@@ -4,7 +4,7 @@ describe PeopleUploader do
   let(:alice) {build(:person)}
   let(:bob) {build(:bob)}
   let(:people) {[alice, bob]}
-  let(:yaml) do 
+  let(:yaml) do
     "people:
     - name: alice
       team: ateam
@@ -37,7 +37,7 @@ describe PeopleUploader do
     subject {PeopleUploader.new.parse yaml}
     it "parses the file" do
       expect(subject).to match_array people
-    end 
+    end
   end
 
   context '#upload' do

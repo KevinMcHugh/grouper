@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 
 describe ByStartDateScorer do
   describe '.score' do
@@ -10,7 +10,8 @@ describe ByStartDateScorer do
     let (:f) {build(:bob, name: 'f', start: "2008-01-01")}
 
     context 'with 2 person groups' do
-      subject {ByStartDateScorer.score([[alice, bob],[alice, carol], [bob, carol]])}
+      subject {ByStartDateScorer.score([[alice, bob],
+        [alice, carol], [bob, carol]])}
       it 'scores to accentuate differences' do
         expect(subject).to match_array [{group: [alice,bob],   score: 1},
                         {group: [alice,carol], score: 0},
@@ -18,8 +19,8 @@ describe ByStartDateScorer do
       end
     end
     context 'with 4 person groups' do
-      subject {ByStartDateScorer.score([[alice,bob,carol,f], [alice,carol,dan,e],
-                                        [alice,bob,carol,dan]])}
+      subject {ByStartDateScorer.score([[alice,bob,carol,f], 
+        [alice,carol,dan,e], [alice,bob,carol,dan]])}
       it 'scores to accentuate differences' do
         expect(subject).to match_array [{group: [alice,bob,carol,f], score: 1},
                       {group: [alice,carol,dan,e], score: 0},

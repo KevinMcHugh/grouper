@@ -1,5 +1,5 @@
 class ByStartDateScorer < ScorerLoop
-  def self.score people_arrays 
+  def self.score people_arrays
     score_loop(people_arrays) do |people|
       score_people(people).to_f / people.length
     end
