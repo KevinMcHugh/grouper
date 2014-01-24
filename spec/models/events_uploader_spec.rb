@@ -25,7 +25,7 @@ describe EventsUploader do
       event_uploader.should_receive(:parse).and_call_original
       event_uploader.should_receive(:create_event).with(event).and_call_original
       expect(subject).to eq event
-      expect(subject.people.map(&:name)).to match_array group.people.map(&:name)
+      expect(subject.people).to match_array group.people
     end
   end
 end
