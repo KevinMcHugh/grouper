@@ -8,5 +8,6 @@ class Group < ActiveRecord::Base
     eql_events && eql_people
   end
 
-  def inspect; people.map {|p| p.name}; end
+  def inspect; people.map &:to_s; end
+  alias_method :to_s, :inspect
 end
