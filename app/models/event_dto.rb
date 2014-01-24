@@ -5,10 +5,10 @@ class EventDTO
 
   def group_table
     if !@event.groups.empty?
-      group_text = @event.groups.map.with_index(1) do |g, i|
-        ["Group #{i}"] + g.people.map {|p| p.name}
+      group_text = @event.groups.map.with_index(1) do |group, int|
+        ["Group #{int}"] + group.to_s
       end
-      max_size = group_text.max {|r1, r2| r1.size <=> r2.size}.size
+      max_size = group_text.max_by {|string| string.size}.size
       group_text.each {|r| r[max_size - 1] ||= nil }
       group_text.transpose
     end
