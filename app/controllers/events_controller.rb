@@ -54,9 +54,9 @@ class EventsController < ApplicationController
   def announce
     @event = Event.find(params[:id])
     went_last_time = @event.previous_event.people.to_a
-    went_last_time.map {|person| EventMailer.opt_out_mail(@event, person).deliver }
+    went_last_time.each {|person| EventMailer.opt_out_mail(@event, person).deliver }
     others = Person.all.to_a - went_last_time
-    others.map { |person| EventMailer.opt_in_mail(@event, person).deliver }
+    others.each { |person| EventMailer.opt_in_mail(@event, person).deliver }
     redirect_to email_sent_event_path
   end
 
