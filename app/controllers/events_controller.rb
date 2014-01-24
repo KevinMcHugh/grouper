@@ -28,7 +28,7 @@ class EventsController < ApplicationController
     @event.save
     redirect_to event_path(@event)
   end
-  
+
   def add_all_people
     @event = Event.find(params[:id])
     @event.people = Person.all
@@ -72,7 +72,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  private 
+  private
   def event_params
     params.required(:event).permit(:groups, :name)
   end

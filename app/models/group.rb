@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   has_and_belongs_to_many   :people
 
   def == other
-    eql_events = other.event == event 
+    eql_events = other.event == event
     eql_people = (other.people - people) == (people - other.people)
     eql_events && eql_people
   end

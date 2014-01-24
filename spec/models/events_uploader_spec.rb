@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe EventsUploader do
-  let(:yaml) do 
+  let(:yaml) do
     "
     name: test_event
     groups:
@@ -27,5 +27,5 @@ describe EventsUploader do
       expect(subject).to eq event
       expect(subject.people.map(&:name)).to match_array [alice,bob,carol,dan].map(&:name)
     end
-  end 
+  end
 end

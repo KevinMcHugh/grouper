@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 
 describe ByGenderScorer do
   describe '.score' do
@@ -8,8 +8,8 @@ describe ByGenderScorer do
       let (:carol) {build(:carol)}
       let (:dan)   {build(:dan)}
       context 'with 2 person groups' do
-        subject {ByGenderScorer.score([[alice, bob],[alice, carol], [alice, dan],
-                          [bob, carol], [bob, dan], [carol, dan]])}
+        subject {ByGenderScorer.score([[alice, bob],[alice, carol], 
+          [alice, dan], [bob, carol], [bob, dan], [carol, dan]])}
         it 'scores to accentuate differences' do
           expect(subject).to match_array [{group: [alice,bob],   score: 1},
                           {group: [alice,carol], score: 0},

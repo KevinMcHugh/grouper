@@ -1,10 +1,9 @@
 class ByPreviousGroupsScorer < ScorerLoop
   def self.score people_arrays
-    groups = recent_groups
-    all_people = people_arrays.flatten.uniq
-    people_to_previous_group_members = previous_group_members_for all_people, recent_groups
+    people = people_arrays.flatten.uniq
+    people_to_group_members = group_members_for_all people, recent_groups
     score_loop(people_arrays) do
-      |people| score_people(people, people_to_previous_group_members) / people.length
+      |people| score_people(people, people_to_group_members) / people.length
     end
   end
 
@@ -30,13 +29,21 @@ class ByPreviousGroupsScorer < ScorerLoop
       recent_events.flat_map(&:groups)
     end
 
-    def self.previous_group_members_for people, groups
-      people_to_previous_group_members = {}
+    def self.group_members_for_all people, groups
+      people_to_group_members = {}
       people.each do |person|
-        groups_including_person = groups.find_all {|group| group.people.include? person}
-        previous_group_members = groups_including_person.map(&:people).flatten.uniq
-        people_to_previous_group_members[person] = previous_group_members
+        group_members = group_members_for person, groups
+        people_to_group_members[person] = group_members
       end
-      people_to_previous_group_members
+      people_to_group_members
+    end
+
+    def self.group_members_for person, groups
+      groups_including_person = groups_including person, groups
+      groups_including_person.map(&:people).flatten.uniq
+    end
+
+    def self.groups_including person, groups
+      groups.find_all {|group| group.people.include? person}
     end
 end
