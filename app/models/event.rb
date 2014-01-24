@@ -1,7 +1,6 @@
 class Event < ActiveRecord::Base
   has_many :groups
   has_and_belongs_to_many :people
-  def inspect; "#{name} with #{groups}"; end
 
   after_create :copy_people_from_previous_event
 
@@ -36,6 +35,6 @@ class Event < ActiveRecord::Base
     equal_names && equal_groups
   end
 
-  def inspect; name; end
-  def to_s; name; end
+  def inspect; "#{name}-#{groups.flat_map(&:to_s)}"; end
+  alias_method :to_s, :inspect
 end

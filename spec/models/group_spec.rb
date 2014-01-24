@@ -15,11 +15,4 @@ describe Group do
       it {should_not == group_b}
     end
   end
-
-  describe '#inspect' do
-    let (:alice) {build(:person)}
-    subject{Group.new({people: [alice]}).inspect}
-    context 'it returns the peoples names'
-    it {should == ['alice']}
-  end
 end
