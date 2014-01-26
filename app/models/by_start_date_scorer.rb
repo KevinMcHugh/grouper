@@ -8,8 +8,8 @@ class ByStartDateScorer < ScorerLoop
   private
     def self.score_people people
       start_dates = people.map {|person| person.start }.sort
-      distances = (0..start_dates.length-2).map do |i|
-        start_dates[i+1] - start_dates[i]
+      distances = (0..start_dates.length-2).map do |iter|
+        start_dates[iter+1] - start_dates[iter]
       end
       distances.reduce :+
     end
