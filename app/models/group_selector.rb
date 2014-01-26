@@ -19,16 +19,20 @@ class GroupSelector
       flat_scores = scorers.map do |scorer|
         scorer.score combinations
       end.flatten
-      combine(flat_scores).sort_by {|s| -s[:score]}
+      combine(group_scores(flat_scores)).sort_by {|score| -score[:score]}
     end
 
-    def self.combine flat_scores
-      grouped_scores = flat_scores.group_by {|s| s[:group]}
+    def self.combine grouped_scores
       grouped_scores.values.map do |score_mappings|
-        score_mappings.reduce do |a, i|
-          {group: a[:group], score: (a[:score] + i[:score])}
+        score_mappings.reduce do |accum, iter|
+          score = (accum[:score] + iter[:score])
+          {group: accum[:group], score: score}
         end
       end
+    end
+
+    def self.group_scores flat_scores
+      flat_scores.group_by {|score| score[:group]}
     end
 
     def self.add_to_groups_and_remove_from_to_place group, groups, to_place
@@ -38,7 +42,7 @@ class GroupSelector
     end
 
     def self.next_group scores, to_place
-      group = scores.find { |g| (g[:group] - to_place).empty? }
+      group = scores.find { |score| (score[:group] - to_place).empty? }
       return group[:group] unless group.nil? || group.empty?
       to_place
     end
