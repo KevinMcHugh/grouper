@@ -5,7 +5,7 @@ class Person < ActiveRecord::Base
   def woman?; gender.to_sym.eql? :woman; end
   def inspect; "#{name}:#{id}"; end
   def to_s; name; end
-  
+
   def == other_person
     names = other_person.name == name
     genders = other_person.gender.to_sym == gender.to_sym
