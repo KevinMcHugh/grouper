@@ -19,7 +19,7 @@ describe ByStartDateScorer do
       end
     end
     context 'with 4 person groups' do
-      subject {ByStartDateScorer.score([[alice,bob,carol,f], 
+      subject {ByStartDateScorer.score([[alice,bob,carol,f],
         [alice,carol,dan,e], [alice,bob,carol,dan]])}
       it 'scores to accentuate differences' do
         expect(subject).to match_array [{group: [alice,bob,carol,f], score: 1},
