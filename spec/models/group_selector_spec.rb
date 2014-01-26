@@ -21,13 +21,21 @@ describe GroupSelector do
         end
       end
 
-      context 'and an odd number of people' do
+      context 'and 7 people' do
         let(:group1) {Group.new people: [e,f,g]}
-        let(:group2) {Group.new people: [alice,bob,carol, dan]}
+        let(:group2) {Group.new people: [alice,bob,carol,dan]}
         let (:result) {[group1,group2]}
         subject{GroupSelector.select [alice,bob,carol,dan,e,f,g]}
         it 'selects the most diverse groups' do
-          expect(subject).to match_array [group1, group2]
+          expect(subject).to match_array result
+        end
+      end
+
+      context 'and 5 people' do
+        let(:group) {Group.new people: [alice,bob,carol,dan,e]}
+        subject{GroupSelector.select [alice,bob,carol,dan,e]}
+        it 'puts all 5 in the same group' do
+          expect(subject).to match_array [group]
         end
       end
     end

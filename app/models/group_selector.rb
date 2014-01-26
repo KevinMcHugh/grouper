@@ -49,10 +49,21 @@ class GroupSelector
 
     def self.place groups, scores, to_place
       while !to_place.empty? do
-        group = next_group scores, to_place
-        add_to_groups_and_remove_from_to_place group, groups, to_place
+        if to_place.size < group_size - 1
+          group_index = 0
+          to_place.each do |person, index|
+            groups[group_index] << person
+            group_index += 1
+            group_index = 0 if group_index == groups.size
+          end
+          to_place = []
+        else
+          group = next_group scores, to_place
+          add_to_groups_and_remove_from_to_place group, groups, to_place
+        end
       end
       groups.map {|group| Group.new(people: group)}
     end
+
     def self.group_size; 4; end
 end
