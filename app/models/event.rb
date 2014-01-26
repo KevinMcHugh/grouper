@@ -18,6 +18,10 @@ class Event < ActiveRecord::Base
     people << person unless people.include? person
   end
 
+  def add_people people_to_add
+    people_to_add.each {|person| add_person person}
+  end
+
   def add_groups new_groups
     self.groups = new_groups
     self.groups.map { |group| group.event = self }
