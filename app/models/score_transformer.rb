@@ -10,10 +10,10 @@ class ScoreTransformer
       old_min = group_distance_mapping.values.min
       old_max = group_distance_mapping.values.max
       old_range = old_max - old_min
-      score_each_distance group_distance_mapping, old_min, old_max, old_range
+      score_each_distance group_distance_mapping, old_min, old_range
   end
   private
-    def self.score_each_distance group_distance_mapping, old_min, old_max, old_range
+    def self.score_each_distance group_distance_mapping, old_min, old_range
       group_score_mapping = {}
       return score_equally(group_distance_mapping) if old_range == 0
       group_distance_mapping.keys.each do |group|
