@@ -33,4 +33,15 @@ describe Event do
         expect(subject.people).not_to be_include alice
       end
     end
+
+    context "#add_people" do
+      let(:e) {build(:person, name: 'e')}
+      subject{ build(:event, people: [])}
+      before(:each) do
+        subject.add_people [e]
+      end
+      it "has the people on it" do
+        expect(subject.people).to match_array [e]
+      end
+    end
 end

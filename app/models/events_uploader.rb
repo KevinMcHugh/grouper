@@ -20,7 +20,7 @@ class EventsUploader
 
   def add_people_in_groups_to_event groups, event
     groups.each do |group|
-      group.people.each {|p| event.add_person p}
+      event.add_people group.people
     end
   end
 
