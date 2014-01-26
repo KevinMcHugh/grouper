@@ -13,11 +13,11 @@ class ByPreviousGroupsScorer < ScorerLoop
       people.map do |person|
         already_scored << person
         to_score = people - already_scored
-        score_person person, to_score, people_to_previous_group_members[person]
+        score_person to_score, people_to_previous_group_members[person]
       end.reduce :+
     end
 
-    def self.score_person person, other_people, previously_in_groups
+    def self.score_person other_people, previously_in_groups
       score = other_people.map do |other_person|
         included = previously_in_groups.include? other_person
         included ? 0.0 : 1.0
