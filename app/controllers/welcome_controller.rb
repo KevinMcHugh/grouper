@@ -1,3 +1,4 @@
+#Does nothing.
 class WelcomeController < ApplicationController
   def index
   end

@@ -1,3 +1,5 @@
+#Scores people by who they have previously been in groups with.
+# This is rather slow!
 class ByPreviousGroupsScorer < ScorerLoop
   def self.score people_arrays
     people = people_arrays.flatten.uniq

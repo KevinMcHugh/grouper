@@ -1,3 +1,5 @@
+# Generates scores for combinations of people.
+# Slow, overly complex, could be split into at least 2 classes.
 class GroupSelector
   def self.select people
     scores = get_scores people

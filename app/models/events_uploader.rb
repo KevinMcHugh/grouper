@@ -1,5 +1,5 @@
+# Upload an event.
 class EventsUploader
-
   def upload yaml
     values = YAML.load(yaml)
     name = values["name"]

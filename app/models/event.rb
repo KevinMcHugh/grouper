@@ -1,3 +1,4 @@
+# Represents something when there are groups. Has a name, people
 class Event < ActiveRecord::Base
   has_many :groups
   has_and_belongs_to_many :people

@@ -1,3 +1,4 @@
+# A convenient class for displaying events.
 class EventDTO
   def initialize event
     @event = event

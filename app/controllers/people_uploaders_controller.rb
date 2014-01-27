@@ -1,3 +1,4 @@
+# Lets you upload a bunch of people
 class PeopleUploadersController < ApplicationController
   def create
     people_uploader = PeopleUploader.new

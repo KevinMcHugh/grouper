@@ -1,3 +1,4 @@
+# Groups have people, belong to an event.
 class Group < ActiveRecord::Base
   belongs_to :event
   has_and_belongs_to_many   :people

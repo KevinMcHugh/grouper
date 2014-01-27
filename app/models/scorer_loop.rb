@@ -1,3 +1,6 @@
+# Handles all the common logic for a scorer, iterating
+# over all the people and then those scores into the normallized
+# format expected in GroupSelector
 class ScorerLoop < ScoreTransformer
   def self.score_loop people_arrays, &block
     people_distance_mappings = {}

@@ -1,3 +1,4 @@
+# Create, delete, send mail, invite people, add people to events
 class EventsController < ApplicationController
   def index
     @events = Event.all
