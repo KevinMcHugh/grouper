@@ -1,3 +1,6 @@
+# Scores people by their start date.
+# Distance between start dates are important, so we can't
+# use ByPersonalAttributeScorer.
 class ByStartDateScorer < ScorerLoop
   def self.score people_arrays
     score_loop(people_arrays) do |people|

@@ -1,3 +1,4 @@
+# Everything you might need to do with People
 class PeopleController < ApplicationController
   def index
     @people = Person.all
