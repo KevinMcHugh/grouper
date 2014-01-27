@@ -1,3 +1,4 @@
+# Handles sending of emails for anything event-related.
 class EventMailer < ActionMailer::Base
   def group_mail group, event_name
     email_addresses = group.people.map(&:email_address)
