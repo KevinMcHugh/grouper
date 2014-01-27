@@ -2,11 +2,15 @@ class Event < ActiveRecord::Base
   has_many :groups
   has_and_belongs_to_many :people
 
-  after_create :copy_people_from_previous_event
+  after_create :copy_people
 
-  def copy_people_from_previous_event
+  def copy_people
     if people.empty?
-      self.people = previous_event.people
+      if groups.empty?
+        self.people = previous_event.people
+      else
+        add_people groups.flat_map &:people
+      end
     end
   end
 
