@@ -8,7 +8,7 @@ describe Event do
       subject {event2}
       it "has the people from the previous event" do
         expect(event1.people).to_not be_empty
-        expect(subject.people.map(&:name)).to match_array(event1.people.map(&:name))
+        expect(subject.people).to match_array(event1.people)
       end
     end
     context "#add_groups" do

@@ -17,7 +17,8 @@ class ScoreTransformer
       group_score_mapping = {}
       return score_equally(group_distance_mapping) if old_range == 0
       group_distance_mapping.keys.each do |group|
-        group_score_mapping[group] = ((group_distance_mapping[group] - old_min) / old_range)
+        score = ((group_distance_mapping[group] - old_min) / old_range)
+        group_score_mapping[group] = score
       end
       group_score_mapping
     end
