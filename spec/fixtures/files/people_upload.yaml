@@ -1,0 +1,9 @@
+people:
+- name: alice
+  team: ateam
+  gender: :woman
+  start: 2010-01-01
+- name: bob
+  team: bteam
+  gender: :man
+  start: 2013-01-01
