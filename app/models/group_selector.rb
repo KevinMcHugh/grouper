@@ -49,15 +49,19 @@ class GroupSelector
 
     def self.place groups, scores, to_place
       while !to_place.empty? do
-        if to_place.size < group_size - 1
-          place_odd_people_in groups, to_place
-          to_place = []
-        else
-          group = next_group scores, to_place
-          add_to_groups_and_remove_from_to_place group, groups, to_place
-        end
+        inner_loop groups, scores, to_place
       end
       groups.map {|group| Group.new(people: group)}
+    end
+
+    def self.inner_loop groups, scores, to_place
+      if to_place.size < group_size - 1
+        place_odd_people_in groups, to_place
+        to_place.clear
+      else
+        group = next_group scores, to_place
+        add_to_groups_and_remove_from_to_place group, groups, to_place
+      end
     end
 
     def self.place_odd_people_in groups, people
