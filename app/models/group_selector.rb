@@ -38,7 +38,7 @@ class GroupSelector
     def self.add_to_groups_and_remove_from_to_place group, groups, to_place
       clone = group.clone
       groups << clone
-      to_place.delete_if {|p| clone.include? p }
+      to_place.delete_if {|person| clone.include? person }
     end
 
     def self.next_group scores, to_place
