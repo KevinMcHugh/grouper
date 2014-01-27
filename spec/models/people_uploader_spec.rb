@@ -16,37 +16,9 @@ describe PeopleUploader do
       start: 2013-01-01"
   end
 
-  context '#create_people' do
-    let(:person) {mock_model('Person').as_null_object}
-
-    before(:each) do
-      people.each do |person|
-        person.stub(:save).and_return(true)
-      end
-    end
-    subject{PeopleUploader.new.create_people(people)}
-    it "saves all the given People" do
-      people.each do |person|
-        expect(person).to receive(:save).once
-      end
-      expect(subject).to be_true
-    end
-  end
-
-  context '#parse' do
-    subject {PeopleUploader.new.parse yaml}
-    it "parses the file" do
-      expect(subject).to match_array people
-    end
-  end
-
   context '#upload' do
-    let(:people_uploader) {PeopleUploader.new}
-
-    subject {people_uploader.upload yaml}
-    it "parses and saves the data" do
-      people_uploader.should_receive(:parse).and_call_original
-      people_uploader.should_receive(:create_people).with(people).and_call_original
+    subject{PeopleUploader.new.upload yaml}
+    it "saves all the given People" do
       expect(subject).to match_array people
     end
   end
