@@ -1,6 +1,6 @@
 class EventsUploader
   def upload yaml
-    create_event parse(yaml)
+    parse(yaml)
   end
 
   def parse yaml
@@ -18,10 +18,5 @@ class EventsUploader
 
   def people_in people_names
     people_names.map {|name| Person.find_by name: name }
-  end
-
-  def create_event event
-    event.save
-    event
   end
 end
