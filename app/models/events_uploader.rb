@@ -1,13 +1,10 @@
 class EventsUploader
-  def upload yaml
-    parse(yaml)
-  end
 
-  def parse yaml
+  def upload yaml
     values = YAML.load(yaml)
     name = values["name"]
     groups = groups_from values["groups"]
-    Event.new(groups: groups, name: name)
+    Event.create(groups: groups, name: name)
   end
 
   def groups_from groups
