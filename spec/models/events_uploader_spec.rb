@@ -10,7 +10,7 @@ describe EventsUploader do
      - bob
      - carol
      - dan"
-   end
+  end
   let(:event) {build(:event)}
   let(:group) {build(:group)}
 
