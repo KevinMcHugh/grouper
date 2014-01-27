@@ -1,0 +1,9 @@
+Hello, #{@person.name}! Want to join a group for #{@event.name}?
+
+If you'd like to have lunch with interesting people and increase your happiness in life, just click this link:
+
+= add_person_event_path(id: @event.id, person_id: @person.id, only_path: false)
+
+
+
+Group Organizer
