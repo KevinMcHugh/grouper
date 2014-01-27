@@ -6,7 +6,7 @@
     %th Hire Date
     %th Team
     %th{:colspan => 2} Actions
-  - @people.each do |person|
+  - people.each do |person|
     %tr
       %td= link_to person.name, person_path(person)
       %td #{person.email_address}
