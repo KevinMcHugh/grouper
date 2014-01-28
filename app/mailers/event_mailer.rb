@@ -8,12 +8,14 @@ class EventMailer < ActionMailer::Base
   def opt_in_mail event, person
     @person = person
     @event = event
-    mail(to: person.email_address, subject: event.name)
+    headers['X-Template'] = '{"name": "opt-in"}'
+    m = mail(to: person.email_address, subject: event.name)
   end
 
   def opt_out_mail event, person
     @person = person
     @event = event
+    headers['X-Template'] = '{"name": "opt-out"}'
     mail(to: person.email_address, subject: event.name)
   end
 end
