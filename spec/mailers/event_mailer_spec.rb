@@ -1,20 +1,21 @@
 require 'spec_helper'
 
 describe EventMailer do
-  context '#opt_out_mail' do
+  context '#opt_in_or_out_mail' do
     let(:alice) {create :person}
     let(:event) {create :event}
-    subject { EventMailer.opt_out_mail(event, alice)}
-    it "does stuff" do
-      expect(subject.header['X-Template'].to_s).to eq '{"name": "opt-out"}'
+    let(:e) {create :person, name: 'e'}
+    context "someone on the event" do
+      subject { EventMailer.opt_in_or_out_mail(event, alice)}
+      it "gets an opt-out mail" do
+        expect(subject.header['X-Template'].to_s).to eq '{"name": "opt_out_mail"}'
+      end
     end
-  end
-  context '#opt_in_mail' do
-    let(:alice) {create :person}
-    let(:event) {create :event}
-    subject { EventMailer.opt_in_mail(event, alice)}
-    it "does stuff" do
-      expect(subject.header['X-Template'].to_s).to eq '{"name": "opt-in"}'
+    context "someone not on the event" do
+      subject { EventMailer.opt_in_or_out_mail(event, e)}
+      it "does stuff" do
+        expect(subject.header['X-Template'].to_s).to eq '{"name": "opt_in_mail"}'
+      end
     end
   end
 end
