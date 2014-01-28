@@ -8,7 +8,7 @@
     %th Hire Date
     %th Team
     %th Actions
-  - @event_dto.people.each do |person|
+  - event_dto.people.each do |person|
     %tr
       %td= link_to person.name, person_path(person)
       %td #{person.email_address}
