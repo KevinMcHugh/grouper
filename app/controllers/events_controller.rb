@@ -39,15 +39,15 @@ class EventsController < ApplicationController
 
   def add_person
     @event = Event.find(params[:id])
-    person = Person.find(params[:person_id])
-    @event.add_person person
+    @person = Person.find(params[:person_id])
+    @event.add_person @person
     @event.save
   end
 
   def remove_person
     @event = Event.find(params[:id])
-    person = Person.find(params[:person_id])
-    @event.remove_person person
+    @person = Person.find(params[:person_id])
+    @event.remove_person @person
     @event.save
   end
 
