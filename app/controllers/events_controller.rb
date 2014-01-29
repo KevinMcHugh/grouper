@@ -49,7 +49,6 @@ class EventsController < ApplicationController
     person = Person.find(params[:person_id])
     @event.remove_person person
     @event.save
-    redirect_to event_path(@event)
   end
 
   def announce
