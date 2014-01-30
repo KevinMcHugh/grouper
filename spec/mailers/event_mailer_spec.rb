@@ -5,16 +5,17 @@ describe EventMailer do
     let(:alice) {create :person}
     let(:event) {create :event}
     let(:e) {create :person, name: 'e'}
+    let(:name) {'X-Template'}
     context "someone on the event" do
-      subject { EventMailer.opt_in_or_out_mail(event, alice)}
+      subject { EventMailer.opt_in_or_out_mail(event, alice).header[name]}
       it "gets an opt-out mail" do
-        expect(subject.header['X-Template'].to_s).to eq '{"name": "opt_out_mail"}'
+        expect(subject.to_s).to eq '{"name": "opt_out_mail"}'
       end
     end
     context "someone not on the event" do
-      subject { EventMailer.opt_in_or_out_mail(event, e)}
+      subject { EventMailer.opt_in_or_out_mail(event, e).header[name]}
       it "does stuff" do
-        expect(subject.header['X-Template'].to_s).to eq '{"name": "opt_in_mail"}'
+        expect(subject.to_s).to eq '{"name": "opt_in_mail"}'
       end
     end
   end
