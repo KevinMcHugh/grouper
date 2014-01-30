@@ -37,18 +37,23 @@ class EventsController < ApplicationController
     redirect_to event_path(@event)
   end
 
-  def add_person
+  def add_or_remove_person
     @event = Event.find(params[:id])
     @person = Person.find_by(uuid: params["person_uuid"])
-    @event.add_person @person
+    yield @event, @person
     @event.save
   end
 
+  def add_person
+    add_or_remove_person do |event, person|
+      event.add_person person
+    end
+  end
+
   def remove_person
-    @event = Event.find(params[:id])
-    @person = Person.find_by(uuid: params["person_uuid"])
-    @event.remove_person @person
-    @event.save
+    add_or_remove_person do |event, person|
+      event.remove_person person
+    end
   end
 
   def announce
