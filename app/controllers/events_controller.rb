@@ -37,13 +37,6 @@ class EventsController < ApplicationController
     redirect_to event_path(@event)
   end
 
-  def add_or_remove_person
-    @event = Event.find(params[:id])
-    @person = Person.find_by(uuid: params["person_uuid"])
-    yield @event, @person
-    @event.save
-  end
-
   def add_person
     add_or_remove_person do |event, person|
       event.add_person person
@@ -79,5 +72,25 @@ class EventsController < ApplicationController
   private
   def event_params
     params.required(:event).permit(:groups, :name)
+  end
+
+  def find_by_person_id?
+    params.has_key? :person_id
+  end
+
+  def person
+    if find_by_person_id?
+      Person.find params[:person_id]
+    else
+      Person.find_by(uuid: params["person_uuid"])
+    end
+  end
+
+  def add_or_remove_person
+    @event = Event.find params[:id]
+    @person = person
+    yield @event, @person
+    @event.save
+    redirect_to event_path(@event) if find_by_person_id?
   end
 end
