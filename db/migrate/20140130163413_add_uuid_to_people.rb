@@ -6,9 +6,9 @@ class AddUuidToPeople < ActiveRecord::Migration
     add_column :people, :uuid, :string
     Person.reset_column_information
     reversible do |dir|
-      dir.up do 
+      dir.up do
         Person.all.each do |person|
-          person.update uuid: SecureRandom.uuid 
+          person.update uuid: SecureRandom.uuid
         end
       end
     end
