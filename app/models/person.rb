@@ -2,9 +2,14 @@
 # There should be many teams, and perhaps with tenure checked.
 class Person < ActiveRecord::Base
 
+  after_initialize :add_uuid
   has_and_belongs_to_many :groups
   def inspect; "#{name}:#{id}"; end
   def to_s; name; end
+
+  def add_uuid
+    self.uuid ||= SecureRandom.uuid
+  end
 
   def == other_person
     #TODO: should check team.

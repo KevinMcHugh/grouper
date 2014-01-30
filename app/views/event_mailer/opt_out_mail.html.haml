@@ -3,7 +3,7 @@ Hello, #{@person.name}! I assume you want to go to #{@event.name}?
 %b If you can't go this month, just click this link:
 %br
 
-= remove_person_event_path(id: @event.id, person_id: @person.id,  only_path: false)
+= remove_person_event_path(id: @event.id, person_uuid: @person.uuid,  only_path: false)
 
 %br
 Group Organizer

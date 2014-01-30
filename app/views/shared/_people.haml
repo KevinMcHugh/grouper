@@ -5,6 +5,7 @@
     %th Gender
     %th Hire Date
     %th Team
+    %th UUID
     %th{:colspan => 2} Actions
   - people.each do |person|
     %tr
@@ -13,5 +14,6 @@
       %td #{person.gender}
       %td #{person.start}
       %td #{person.team}
+      %td #{person.uuid}
       %td= link_to 'Edit', edit_person_path(person)
       %td= link_to 'Delete', person_path(person), method: :delete
