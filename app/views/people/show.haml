@@ -8,5 +8,5 @@
   #{@person.start}
 %p
   #{@person.team}
-%p
-  #{@person.uuid}
+
+%p= link_to 'Edit', edit_person_path(@person)
