@@ -12,10 +12,10 @@ class Person < ActiveRecord::Base
   end
 
   def == other_person
-    #TODO: should check team.
     names = other_person.name == name
     genders = other_person.gender.to_sym == gender.to_sym
     starts = other_person.start == start
-    names && genders && starts
+    teams = other_person.team == team
+    names && genders && starts && teams
   end
 end
