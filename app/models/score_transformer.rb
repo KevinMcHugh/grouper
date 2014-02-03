@@ -1,3 +1,5 @@
+#Takes scores like {[a,b] => 3.0, [b,c] => 0.0}  and returns
+#[{group: [a,b], score: 1.0}, {group: [b,c], score: 0.0}] 
 class ScoreTransformer
   def self.transform group_score_mapping
     result = []
