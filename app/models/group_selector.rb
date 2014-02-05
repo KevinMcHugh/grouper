@@ -1,6 +1,6 @@
 # Generates scores for combinations of people.
 # Slow. Next Improvement might be to implement a 
-# PeopleCombinator that doesn't generate as many 
+# PeopleCombiner that doesn't generate as many 
 # combinations as Array#combination
 class GroupSelector
   def self.select people
