@@ -13,6 +13,7 @@ Grouper::Application.routes.draw do
       get :email_sent
       get :add_all_people
       get :create_groups
+      get :create_groups_with_shims
     end
   end
   resources :people_uploaders

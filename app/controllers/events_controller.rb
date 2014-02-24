@@ -24,7 +24,21 @@ class EventsController < ApplicationController
   def create_groups
     @event = Event.find(params[:id])
     groups = GroupSelector.select(@event.people.to_a)
-    @event.add_groups groups
+    groups = @event.add_groups groups
+    groups.map &:save
+    @event.save
+    redirect_to event_path(@event)
+  end
+
+  def create_groups_with_shims
+    @event = Event.find(params[:id])
+    all_people = @event.people.to_a
+    shims = all_people.map {|p| PersonShim.new p }
+    group_shims = GroupSelector.select(shims)
+    groups = group_shims.map do |group|
+      group.map {|p| Person.find p.id}
+    end
+    groups = @event.add_groups groups
     groups.map &:save
     @event.save
     redirect_to event_path(@event)

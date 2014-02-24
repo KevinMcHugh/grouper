@@ -28,8 +28,9 @@ class Event < ActiveRecord::Base
   end
 
   def add_groups new_groups
-    self.groups = new_groups
+    self.groups = new_groups.map {|g| Group.new people: g}
     self.groups.map { |group| group.event = self }
+    self.groups
   end
 
   def remove_person person

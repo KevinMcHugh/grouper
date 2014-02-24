@@ -1,6 +1,6 @@
 # Generates scores for combinations of people.
-# Slow. Next Improvement might be to implement a 
-# PeopleCombiner that doesn't generate as many 
+# Slow. Next Improvement might be to implement a
+# PeopleCombiner that doesn't generate as many
 # combinations as Array#combination
 class GroupSelector
   def self.select people
@@ -30,7 +30,8 @@ class GroupSelector
       while !to_place.empty? do
         inner_loop groups, scores, to_place
       end
-      groups.map {|group| Group.new(people: group)}
+      groups
+      # groups.map {|group| Group.new(people: group)}
     end
 
     def self.inner_loop groups, scores, to_place

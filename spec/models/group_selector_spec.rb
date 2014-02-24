@@ -13,8 +13,8 @@ describe GroupSelector do
 
     context 'with no previous groups' do
       context 'and an even number of people' do
-        let(:group1) {Group.new people: [e,f,g,h]}
-        let(:group2) {Group.new people: [alice,bob,carol,dan]}
+        let(:group1) {[e,f,g,h]}
+        let(:group2) {[alice,bob,carol,dan]}
         subject{GroupSelector.select [alice,bob,carol,dan,e,f,g,h]}
         it 'selects the most diverse groups' do
           expect(subject).to match_array [group1, group2]
@@ -22,8 +22,8 @@ describe GroupSelector do
       end
 
       context 'and 7 people' do
-        let(:group1) {Group.new people: [e,f,g]}
-        let(:group2) {Group.new people: [alice,bob,carol,dan]}
+        let(:group1) {[e,f,g]}
+        let(:group2) {[alice,bob,carol,dan]}
         let (:result) {[group1,group2]}
         subject{GroupSelector.select [alice,bob,carol,dan,e,f,g]}
         it 'selects the most diverse groups' do
@@ -32,7 +32,7 @@ describe GroupSelector do
       end
 
       context 'and 5 people' do
-        let(:group) {Group.new people: [alice,bob,carol,dan,e]}
+        let(:group) {[alice,bob,carol,dan,e]}
         subject{GroupSelector.select [alice,bob,carol,dan,e]}
         it 'puts all 5 in the same group' do
           expect(subject).to match_array [group]
@@ -46,8 +46,8 @@ describe GroupSelector do
       let (:event) {create(:event, groups: [group1, group2])}
 
 
-      let(:rgroup1) {Group.new people: [alice,bob,g,h]}
-      let(:rgroup2) {Group.new people: [carol,dan,e,f]}
+      let(:rgroup1) {[alice,bob,g,h]}
+      let(:rgroup2) {[carol,dan,e,f]}
       let(:result) {[rgroup1, rgroup2]}
       before(:each) do
         [alice,bob,carol,dan].map {|p| p.groups = [group1]}
