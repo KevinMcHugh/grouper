@@ -8,14 +8,27 @@ class GroupCreator
   def self.log_time method, &block
     now = Time.now
     block.yield
-    logger.info "#{method} @@@@@@@@ in #{Time.now - now}"
+    logger.info "#{method} in #{Time.now - now}"
   end
 
   def self.with_people_shims event
-    log_time("shims") do
+    log_time("person shims") do
       all_people = event.people.to_a
       shims = all_people.map {|p| PersonShim.new p }
       group_shims = GroupSelector.select(shims)
+      groups = group_shims.map do |group|
+        group.map {|p| Person.find p.id}
+      end
+      groups = event.add_groups groups
+      groups.map &:save
+    end
+  end
+
+  def self.with_group_shims event
+    log_time("group shims ") do
+      all_people = event.people.to_a
+      shims = all_people.map {|p| PersonShim.new p }
+      group_shims = GroupSelector.select(shims, ExperimentalGroupScorer)
       groups = group_shims.map do |group|
         group.map {|p| Person.find p.id}
       end
@@ -35,6 +48,6 @@ class GroupCreator
   def self.both event
     logger.info "====================================================="
     with_people_shims event
-    old event
+    with_group_shims event
   end
 end

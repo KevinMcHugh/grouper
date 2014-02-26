@@ -1,0 +1,3 @@
+class ExperimentalGroupScorer < GroupScorer
+
+end

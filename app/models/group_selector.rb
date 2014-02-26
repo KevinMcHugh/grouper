@@ -3,9 +3,9 @@
 # PeopleCombiner that doesn't generate as many
 # combinations as Array#combination
 class GroupSelector
-  def self.select people
+  def self.select people, group_scorer=GroupScorer
     people_arrays = people.combination(group_size).to_a
-    scores = GroupScorer.score people_arrays
+    scores = group_scorer.score people_arrays
     to_place = people
     groups = []
     first_group = scores.first[:group]
@@ -31,7 +31,6 @@ class GroupSelector
         inner_loop groups, scores, to_place
       end
       groups
-      # groups.map {|group| Group.new(people: group)}
     end
 
     def self.inner_loop groups, scores, to_place
