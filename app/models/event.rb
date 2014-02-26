@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   end
 
   def previous_event
-    previous_event = Event.last(2).first
+    Event.last(2).first
   end
 
   def add_person person
