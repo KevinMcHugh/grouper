@@ -48,6 +48,6 @@ class GroupCreator
   def self.both event
     logger.info "====================================================="
     with_people_shims event
-    with_group_shims event
+    # with_group_shims event
   end
 end
