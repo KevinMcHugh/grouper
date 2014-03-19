@@ -18,4 +18,12 @@ class Person < ActiveRecord::Base
     teams = other_person.team == team
     names && genders && starts && teams
   end
+
+  def to_shim with_groups=false
+    if with_groups
+      PersonShimWithGroups.new self
+    else
+      PersonShim.new self
+    end
+  end
 end
