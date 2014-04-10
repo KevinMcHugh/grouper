@@ -23,7 +23,7 @@ class EventsController < ApplicationController
 
   def create_groups
     @event = Event.find(params[:id])
-    GroupCreator.old @event
+    GroupCreator.with_people_shims @event
     @event.save
     redirect_to event_path(@event)
   end
