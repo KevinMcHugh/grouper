@@ -40,6 +40,9 @@ group :development, :test do
   gem 'ruby-prof'
 end
 
+gem "codeclimate-test-reporter", group: :test, require: nil
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
