@@ -5,12 +5,15 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <link rel="stylesheet" type="text/css" href="/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="/all.css">
-  <script src="/bootstrap.js"></script>
 </head>
 <body>
-
+<%= nav_bar :static => :top, :brand => "Grouper", :responsive => true do %>
+    <%= menu_group do %>
+        <%= menu_item "All People", people_path %>
+        <%= menu_divider %>
+        <%= menu_item "All Events", events_path %>
+    <% end %>
+<% end %>
 <%= yield %>
 
 </body>
