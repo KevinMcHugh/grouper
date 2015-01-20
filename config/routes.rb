@@ -18,7 +18,7 @@ Grouper::Application.routes.draw do
   end
   resources :people_uploaders
   resources :events_uploaders
-  root 'welcome#index'
+  root 'events#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -11,8 +11,6 @@
       %td= link_to event.name, event_path(event)
       %td{:align => :center} #{event.people.size}
       %td{:align => :center} #{event.groups.size}
-      %td= link_to 'Delete', event_path(event), method: :delete
+      %td= link_to 'Delete', event_path(event), {method: :delete, class: 'btn' }
 
-= link_to 'Create an event', new_event_path
-%p
-= link_to 'Back to Home', root_path
+= link_to 'Create an event', new_event_path, {class: 'btn'}
