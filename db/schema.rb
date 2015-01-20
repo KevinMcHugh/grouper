@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140130163413) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "events", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 20140130163413) do
     t.integer "person_id"
   end
 
-  add_index "events_people", ["event_id"], name: "index_events_people_on_event_id"
-  add_index "events_people", ["person_id"], name: "index_events_people_on_person_id"
+  add_index "events_people", ["event_id"], name: "index_events_people_on_event_id", using: :btree
+  add_index "events_people", ["person_id"], name: "index_events_people_on_person_id", using: :btree
 
   create_table "groups", force: true do |t|
     t.integer  "event_id"
@@ -33,15 +36,15 @@ ActiveRecord::Schema.define(version: 20140130163413) do
     t.datetime "updated_at"
   end
 
-  add_index "groups", ["event_id"], name: "index_groups_on_event_id"
+  add_index "groups", ["event_id"], name: "index_groups_on_event_id", using: :btree
 
   create_table "groups_people", id: false, force: true do |t|
     t.integer "group_id"
     t.integer "person_id"
   end
 
-  add_index "groups_people", ["group_id"], name: "index_groups_people_on_group_id"
-  add_index "groups_people", ["person_id"], name: "index_groups_people_on_person_id"
+  add_index "groups_people", ["group_id"], name: "index_groups_people_on_group_id", using: :btree
+  add_index "groups_people", ["person_id"], name: "index_groups_people_on_person_id", using: :btree
 
   create_table "people", force: true do |t|
     t.string   "name"
