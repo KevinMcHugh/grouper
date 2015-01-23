@@ -14,8 +14,9 @@ class EventMailer < ActionMailer::Base
       template = "opt_in_mail"
     end
     headers['X-Template'] = '{"name": "' + template + '"}'
-    m = mail(to: person.email_address,
-            subject: event.name,
-            template_name: template)
+    mail(to: person.email_address,
+         from: 'no_reply@example.com',
+         subject: event.name,
+         template_name: template)
   end
 end

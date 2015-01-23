@@ -45,6 +45,6 @@ class Event < ActiveRecord::Base
     equal_names && equal_groups
   end
 
-  def inspect; "#{name}-#{people.map(&:to_s)}:#{:id}"; end
+  def inspect; "#{name}-#{people.map(&:to_s)}:#{id}"; end
   alias_method :to_s, :inspect
 end
