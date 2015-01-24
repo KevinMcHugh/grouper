@@ -1,14 +1,13 @@
-%p
-  #{@person.name}
-%p
-  #{@person.email_address}
-%p
-  #{@person.gender}
-%p
-  #{@person.start}
-%p
-  #{@person.team}
+.container
+  %p
+    #{@person.name}
+  %p
+    #{@person.email_address}
+  %p
+    #{@person.gender}
+  %p
+    #{@person.start}
+  %p
+    #{@person.team}
 
-%p= link_to 'Edit', edit_person_path(@person)
-%p
-= link_to 'Back to Home', root_path
+  %p= link_to 'Edit', edit_person_path(@person), class: 'btn'

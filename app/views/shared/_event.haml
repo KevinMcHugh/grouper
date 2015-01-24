@@ -13,7 +13,7 @@
       %td #{person.email_address}
       %td #{person.gender}
       %td #{person.start}
-      %td= link_to 'Remove', remove_person_event_path(id: event_dto.id, person_id: person.id)
+      %td= link_to 'Remove', remove_person_event_path(id: event_dto.id, person_id: person.id), class: 'btn'
 
 - if event_dto.group_table
   %h3 Groups:
