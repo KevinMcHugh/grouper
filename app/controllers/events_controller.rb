@@ -43,12 +43,14 @@ class EventsController < ApplicationController
   end
 
   def add_person
+    @disable_navbar = true
     add_or_remove_person do |event, person|
       event.add_person person
     end
   end
 
   def remove_person
+    @disable_navbar = true
     add_or_remove_person do |event, person|
       event.remove_person person
     end
