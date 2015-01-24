@@ -23,10 +23,10 @@
       -row.each do |cell|
         %td= cell
 
-%p= link_to 'Announce This Event!', announce_event_path(event_dto.id), method: :post
-%p= link_to 'Add Everyone To Event', add_all_people_event_path(event_dto.id)
-%p= link_to 'Create Groups', create_groups_event_path(event_dto.id)
-%p= link_to 'Create Groups TEST', create_groups_with_shims_event_path(event_dto.id)
+.complete
+  %p= link_to 'Add All People To Event', add_all_people_event_path(event_dto.id), class: 'btn btn-primary'
+  %p= link_to 'Create Groups', create_groups_event_path(event_dto.id), class: 'btn btn-primary'
 
-%p= link_to 'Send Email To Groups', send_email_event_path(event_dto.id), method: :post
-%p= link_to 'Delete', event_path(event_dto.id), method: :delete
+  %p= link_to 'Send Opt-In/Opt-Out Emails', announce_event_path(event_dto.id), method: :post, class: 'btn btn-danger'
+  %p= link_to 'Send Group Organization Emails', send_email_event_path(event_dto.id), method: :post, class: 'btn btn-danger  '
+  %p= link_to 'Delete', event_path(event_dto.id), method: :delete, class: 'btn btn-warning'
