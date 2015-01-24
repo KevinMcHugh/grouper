@@ -2,7 +2,7 @@
 class EventMailer < ActionMailer::Base
   def group_mail group, event_name
     email_addresses = group.people.map(&:email_address)
-    mail(to: email_addresses, subject: event_name)
+    mail(to: email_addresses, from: from, subject: event_name)
   end
 
   def opt_in_or_out_mail event, person
@@ -15,8 +15,11 @@ class EventMailer < ActionMailer::Base
     end
     headers['X-Template'] = '{"name": "' + template + '"}'
     mail(to: person.email_address,
-         from: 'no_reply@example.com',
+         from: from,
          subject: event.name,
          template_name: template)
   end
+
+  private
+  def from; 'no_reply@example.com'; end
 end
