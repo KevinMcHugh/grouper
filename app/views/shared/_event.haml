@@ -27,6 +27,6 @@
   %p= link_to 'Add All People To Event', add_all_people_event_path(event_dto.id), class: 'btn btn-primary'
   %p= link_to 'Create Groups', create_groups_event_path(event_dto.id), class: 'btn btn-primary'
 
-  %p= link_to 'Send Opt-In/Opt-Out Emails', announce_event_path(event_dto.id), method: :post, class: 'btn btn-warning'
+  %p= link_to 'Send Opt-In/Opt-Out Emails TO EVERYONE', announce_event_path(event_dto.id), method: :post, class: 'btn btn-warning'
   %p= link_to 'Send Group Organization Emails', send_email_event_path(event_dto.id), method: :post, class: 'btn btn-warning  '
   %p= link_to 'Delete', event_path(event_dto.id), method: :delete, class: 'btn btn-danger'
