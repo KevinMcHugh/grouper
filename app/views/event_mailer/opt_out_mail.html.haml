@@ -3,9 +3,8 @@ Hello, #{@person.name}! I assume you want to go to #{@event.name}.
 If you want to go, you don't have to do anything. You'll get a followup email sometime in the next week.
 %br
 %b If you can't go this month, just click this link:
-%br
 
-= remove_person_event_path(id: @event.id, person_uuid: @person.uuid,  only_path: false)
+= link_to('click here', remove_person_event_path(id: @event.id, person_uuid: @person.uuid, only_path: false))
 
 %br
 Group Organizer

@@ -1,9 +1,7 @@
 Hello, #{@person.name}! Want to join a group for #{@event.name}?
 %br
-%b If you'd like to have lunch with interesting people and increase your happiness in life, just click this link:
-%br
-
-= add_person_event_path(id: @event.id, person_uuid: @person.uuid, only_path: false)
+%b If you'd like to have lunch with interesting people and increase your happiness in life
+= link_to('click here', add_person_event_path(id: @event.id, person_uuid: @person.uuid, only_path: false))
 
 %br
 Group Organizer
