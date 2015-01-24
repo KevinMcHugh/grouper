@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(person_params)
     @person.save
-    redirect_to person_path(@person)
+    redirect_to people_path
   end
 
   def show
