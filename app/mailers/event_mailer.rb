@@ -21,5 +21,5 @@ class EventMailer < ActionMailer::Base
   end
 
   private
-  def from; 'mmorris-cohen@urbanbound.com'; end
+  def from; ENV['FROM_EMAIL_ADDRESS']; end
 end
