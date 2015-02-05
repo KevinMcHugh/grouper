@@ -18,6 +18,7 @@ Grouper::Application.routes.draw do
   end
   resources :people_uploaders
   resources :events_uploaders
+  resources :logins, only: [:new, :create]
   root 'events#index'
 
   # Example of regular route:

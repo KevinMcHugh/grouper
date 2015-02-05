@@ -1,0 +1,6 @@
+.container
+  = form_for :login, url: logins_path  do |f|
+    %p
+    = f.label :key
+    %br
+    = f.text_field :key
