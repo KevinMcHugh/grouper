@@ -21,5 +21,5 @@ class EventMailer < ActionMailer::Base
   end
 
   private
-  def from; 'no_reply@example.com'; end
+  def from; 'mmorris-cohen@urbanbound.com'; end
 end
